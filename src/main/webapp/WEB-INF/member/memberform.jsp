@@ -51,6 +51,7 @@
 <body>
 
 <div class="container">
+    <h1>변경됐나 </h1>
     <h3 class="text-center mb-4">회원 가입</h3>
     <form action="https://dribbble.com/signup/new" method="post">
         <div class="form-group">
@@ -80,8 +81,6 @@
         <div class="form-profile-img">
             <img src="" id="showimg1" style="width: 100px;"
                  onerror="this.src='../image/saram.png'" class="rounded-circle">
-
-            이미지
         </div>
 
         <div class="form-group">
