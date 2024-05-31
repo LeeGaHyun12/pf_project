@@ -60,6 +60,7 @@
             width: 70%;
             height: auto;
         }
+        /* gd */
     </style>
 </head>
 <body>
