@@ -60,7 +60,7 @@
             width: 70%;
             height: auto;
         }
-        /* gd */
+        /* gdㅇ */
     </style>
 </head>
 <body>
