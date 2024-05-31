@@ -39,6 +39,8 @@
             font-size: 35px;
             text-align: center;
         }
+
+
         div.mainlayout>div.menu{
             top: 100px;
             width: 100%;
