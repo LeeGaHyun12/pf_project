@@ -27,6 +27,7 @@ public class MemberListController {
         model.addAttribute("list",list);
         model.addAttribute("totalCount", totalCount);
 
+
         return "member/memberlist";
     }
 

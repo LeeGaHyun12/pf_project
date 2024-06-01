@@ -192,6 +192,7 @@
 
 
         <div class="form-group text-center">
+
             <button type="submit" class="btn btn-danger btn-block">회원가입</button>
         </div>
     </form>
