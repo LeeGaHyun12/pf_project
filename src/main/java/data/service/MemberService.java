@@ -26,6 +26,7 @@ public class MemberService {
         memInter.insertMember(dto);
     }
 
+
     public List<MemberDto> getAllMembers(){
         return memInter.getAllMembers();
     }

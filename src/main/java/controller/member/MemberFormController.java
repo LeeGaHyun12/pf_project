@@ -60,6 +60,7 @@ public class MemberFormController {
         memberService.insertMember(dto);
 
         return "redirect:./login";
+
     }
 
 }
