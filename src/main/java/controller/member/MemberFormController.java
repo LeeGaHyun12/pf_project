@@ -64,7 +64,7 @@ public class MemberFormController {
         //db에 저장
         memberService.insertMember(dto);
 
-        return "redirect:/member/form";
+        return "redirect:/member/login";
 
     }
 

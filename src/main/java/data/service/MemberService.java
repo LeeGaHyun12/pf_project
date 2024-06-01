@@ -48,8 +48,8 @@ public class MemberService {
         return n==1?true:false;
     }
 
-    public boolean isLoginCheck(String user_Id,String pass)
+    public boolean isLoginCheck(String user_Id,String passwd)
     {
-        return memInter.isLoginCheck(user_Id, pass)==1?true:false;
+        return memInter.isLoginCheck(user_Id, passwd)==1?true:false;
     }
 }
