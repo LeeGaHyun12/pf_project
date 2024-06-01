@@ -21,7 +21,12 @@ public class MemberFormController {
 
     @GetMapping("/member/form")
     public String form(){
-        return "member/memberform";
+        return "member/form";
+    }
+
+    @GetMapping("/member/login")
+    public String login(){
+        return "member/login";
     }
 
     @ResponseBody //json으로 반환
@@ -59,7 +64,7 @@ public class MemberFormController {
         //db에 저장
         memberService.insertMember(dto);
 
-        return "redirect:./login";
+        return "redirect:/member/form";
 
     }
 

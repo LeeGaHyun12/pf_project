@@ -12,4 +12,8 @@
     <definition name="*/*" extends="mainLayout">
         <put-attribute name="main" value="/WEB-INF/{1}/{2}.jsp"/>
     </definition>
+
+    <!-- Layout 적용하지 않을 페이지들 -->
+    <definition name="member/form" template="/WEB-INF/member/form.jsp"/>
+    <definition name="member/login" template="/WEB-INF/member/login.jsp"/>
 </tiles-definitions>
