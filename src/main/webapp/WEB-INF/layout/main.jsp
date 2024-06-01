@@ -26,6 +26,6 @@
     </style>
 </head>
 <body>
-main
+Home
 </body>
 </html>

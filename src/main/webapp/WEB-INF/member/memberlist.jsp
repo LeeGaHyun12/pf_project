@@ -18,7 +18,6 @@
         }
     </style>
 </head>
-<c:set var="stpath" value="https://kr.object.ncloudstorage.com/bitcamp-bucket-56/photocommon"/>
 <body>
 <h2 class="alert alert-warning" style="width: 700px;">
     총 ${totalCount}명의 회원이 있습니다
@@ -29,11 +28,11 @@
 </h2>
 
 <%--<c:if test="${sessionScope.loginok!=null and sessionScope.loginid=='admin'}">--%>
-<%--    <h2>--%>
-<%--        <b>--%>
-<%--            전체 회원 명단은 관리자만 확인 가능합니다--%>
-<%--        </b>--%>
-<%--    </h2>--%>
+    <h2>
+        <b>
+            전체 회원 명단은 관리자만 확인 가능합니다
+        </b>
+    </h2>
 <table class="table table-light table-hover table-sm" style="width: 700px;">
     <caption align="top">
         <h3><b>회원명단</b></h3>
@@ -42,20 +41,20 @@
         <th width="100">번호</th>
         <th width="170">회원명</th>
         <th width="150">아이디</th>
-        <th width="190">핸드폰</th>
+        <th width="190">이메일</th>
         <th>상세보기</th>
     </tr>
     <c:forEach var="dto" items="${list}" varStatus="i">
         <tr>
             <td align="center">${i.count}</td>
             <td>
-                <img src="${stpath}/${dto.photo}" class="rounded-circle"
+                <img src="/profile/${dto.prof_photo}" class="rounded-circle"
                      style="width: 40px;height: 40px;"
                      onerror="this.src='../image/noimage1.png'">
                     ${dto.name}
             </td>
-            <td>${dto.myid}</td>
-            <td>${dto.hp}</td>
+            <td>${dto.userId}</td>
+            <td>${dto.email}</td>
             <td align="center">
                 <button type="button" class="btn btn-sm btn-info"
                         onclick="location.href='./detail?num=${dto.num}'">Detail</button>

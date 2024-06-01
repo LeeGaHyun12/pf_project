@@ -30,12 +30,12 @@ public class MemberListController {
         return "member/memberlist";
     }
 
-    @GetMapping("/member/detail")
-    public String detail(@RequestParam int num, Model model)
-    {
-        MemberDto dto=memberService.getData(num);
-        model.addAttribute("dto", dto);
-        return "member/detailpage";
-    }
+//    @GetMapping("/member/detail")
+//    public String detail(@RequestParam int num, Model model)
+//    {
+//        MemberDto dto=memberService.getData(num);
+//        model.addAttribute("dto", dto);
+//        return "member/detailpage";
+//    }
     
 }

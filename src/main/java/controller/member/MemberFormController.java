@@ -46,12 +46,12 @@ public class MemberFormController {
         //업로드한 파일의 확장자 분리
         String ext=myfile.getOriginalFilename().split("\\.")[1];
         //업로드할 파일명
-        String photo= UUID.randomUUID()+ext;
-        dto.setProf_photo(photo);
+        String photoname= UUID.randomUUID()+ext;
+        dto.setProf_photo(photoname);
 
         //실제 업로드
         try {
-            myfile.transferTo(new File(savePath+"/"+photo));
+            myfile.transferTo(new File(savePath+"/"+photoname));
         } catch (IllegalStateException | IOException e) {
             e.printStackTrace();
         }
@@ -59,7 +59,7 @@ public class MemberFormController {
         //db에 저장
         memberService.insertMember(dto);
 
-        return "redirect:./list";
+        return "redirect:./login";
     }
 
 }

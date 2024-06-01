@@ -10,13 +10,27 @@
     <title>회원 가입</title>
     <!-- 부트스트랩 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- 구글 폰트 -->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
     <!-- 사용자 정의 CSS -->
     <style>
-        body, input {
-            font-family: 'Noto Sans KR', sans-serif;
+        @font-face {
+            font-family : 'YangjuByeolsanA1';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2405@1.0/YangjuByeolsanA1.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
         }
+        body *{
+            font-family : 'YangjuByeolsanA1';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2405@1.0/YangjuByeolsanA1.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+        body,input {
+            font-family : 'YangjuByeolsanA1';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2405@1.0/YangjuByeolsanA1.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
         .container {
             max-width: 500px;
             margin: 50px auto;
@@ -47,21 +61,84 @@
             border-color: #d8336b;
         }
     </style>
+    <script type="text/javascript">
+        let jungbok=false;
+
+        $(function(){
+            $("#myfile").change(function(){
+                //console.log($(this)[0]);//type 이 file 인경우 배열타입으로 넘어온다
+                let reg=/(.*?)\/(jpg|jpeg|png|gif)$/;
+                let f=$(this)[0].files[0];
+                if(!f.type.match(reg)){
+                    alert("이미지 파일만 가능합니다");
+                    return;
+                }
+                if(f){
+                    let reader=new FileReader();
+                    reader.onload=function(e){
+                        $("#showimg1").attr("src",e.target.result);
+                    }
+                    reader.readAsDataURL($(this)[0].files[0]);
+                }
+            });
+
+            //중복버튼 이벤트
+            $("#btncheckid").click(function(){
+                if($("#userId").val()==''){
+                    alert("가입할 아이디를 입력해주세요");
+                    return;
+                }
+
+                $.ajax({
+                    type:"get",
+                    dataType:"json",
+                    url:"./idcheck",
+                    data:{"searchid":$("#userId").val()},
+                    success:function(data){
+                        if(data.count==0){
+                            alert("가입 가능한 아이디입니다");
+                            jungbok=true;
+                        }else{
+                            alert("이미 가입되어있는 아이디입니다");
+                            jungbok=false;
+                            $("#userId").val("");
+                        }
+                    }
+                });
+            });
+
+            //아이디를 입력시 다시 중복확인을 누르도록 중복변수를 초기화
+            $("#userId").keyup(function(){
+                jungbok=false;
+            });
+        });  //close function
+
+
+        function check()
+        {
+            if(!jungbok){
+                alert("아이디 중복확인을 해주세요");
+                return false;//false반환시 action 실행을 안함
+            }
+        }
+    </script>
 </head>
 <body>
 
 <div class="container">
-    <h1>변경됐나 </h1>
     <h3 class="text-center mb-4">회원 가입</h3>
-    <form action="https://dribbble.com/signup/new" method="post">
+    <form action="./insert" method="post" enctype="multipart/form-data" onsubmit="return check()">
         <div class="form-group">
             <label for="name">이름</label>
             <input type="text" id="name" name="name" class="form-control" required>
         </div>
 
-        <div class="form-group">
+        <div class="form-group-id" style="width: 300px;">
             <label for="userId">아이디</label>
             <input type="text" id="userId" name="userId" class="form-control" required>
+            &nbsp;
+            <button type="button" class="btn btn-sm btn-danger"
+                    id="btncheckid">중복확인</button>
         </div>
 
         <div class="form-group">
@@ -74,29 +151,44 @@
             <input type="password" id="passwd" name="passwd" class="form-control" required maxlength="8">
         </div>
 
-        <div class="form-profile" style="width: 250px;">
-            <label for="myfile">프로필사진</label>
-            <input type="file" id="myfile" name="myfile" class="form-control" required>
+        <div class="form-profile" style="width: 300px;">
+            <div class="form-profile-img">
+                <img src="" id="showimg1" style="width: 100px; margin: 10px;"
+                     onerror="this.src='../image/saram.png'" class="rounded-circle">
+                <input type="file" id="myfile" name="myfile" class="form-control" required style="width: 400px;">
+            </div>
+
+
         </div>
-        <div class="form-profile-img">
-            <img src="" id="showimg1" style="width: 100px;"
-                 onerror="this.src='../image/saram.png'" class="rounded-circle">
-        </div>
 
-        <div class="form-group">
-            <label>관심 분야</label><br>
-            <input type="checkbox" id="graphic_design" name="graphic_design">
-            <label for="graphic_design">그래픽 디자인</label><br>
 
-            <input type="checkbox" id="web_design" name="web_design">
-            <label for="web_design">웹 디자인</label><br>
+        <table style="width: 300px;">
+            <tr>
+                <td><input type="checkbox" id="graphic_design" name="graphic_design"><label for="graphic_design">그래픽 디자인</label></td>
+                <td><input type="checkbox" id="branding_editing" name="branding_editing"><label for="branding_editing">브랜딩/편집</label></td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" id="video_motion_graphics" name="video_motion_graphics"><label for="video_motion_graphics">영상/모션그래픽</label></td>
+                <td><input type="checkbox" id="ui_ux" name="ui_ux"><label for="ui_ux">UI/UX</label></td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" id="character_design" name="character_design"><label for="character_design">캐릭터 디자인</label></td>
+                <td><input type="checkbox" id="product_package_design" name="product_package_design"><label for="product_package_design">제품/패키지 디자인</label></td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" id="digital_art" name="digital_art"><label for="digital_art">디지털 아트</label></td>
+                <td><input type="checkbox" id="typography" name="typography"><label for="typography">타이포그래피</label></td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" id="illustration" name="illustration"><label for="illustration">일러스트레이션</label></td>
+                <td><input type="checkbox" id="photography" name="photography"><label for="photography">포토그래피</label></td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" id="fine_art" name="fine_art"><label for="fine_art">파인아트</label></td>
+                <td><input type="checkbox" id="craft" name="craft"><label for="craft">공예</label></td>
+            </tr>
+        </table>
 
-            <input type="checkbox" id="illustration" name="illustration">
-            <label for="illustration">일러스트레이션</label><br>
-
-            <input type="checkbox" id="photography" name="photography">
-            <label for="photography">포토그래피</label><br>
-        </div>
 
         <div class="form-group text-center">
             <button type="submit" class="btn btn-danger btn-block">회원가입</button>
