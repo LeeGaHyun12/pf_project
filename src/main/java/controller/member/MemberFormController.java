@@ -33,6 +33,7 @@ public class MemberFormController {
         int count = memberService.getIdCheckCount(searchid);
         map.put("count", count);
         return map;
+
     }
 
     @PostMapping("/member/insert")
