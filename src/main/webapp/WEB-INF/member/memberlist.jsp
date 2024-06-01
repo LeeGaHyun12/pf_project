@@ -27,17 +27,18 @@
 	</span>
 </h2>
 
-<%--<c:if test="${sessionScope.loginok!=null and sessionScope.loginid=='admin'}">--%>
+    <%--<c:if test="${sessionScope.loginok!=null and sessionScope.loginid=='admin'}">--%>
     <h2>
         <b>
             전체 회원 명단은 관리자만 확인 가능합니다
         </b>
     </h2>
-<table class="table table-light table-hover table-sm" style="width: 700px;">
-    <caption align="top">
-        <h3><b>회원명단</b></h3>
-    </caption>
-    <tr class="table-primary">
+    <table class="table table-light table-hover table-sm" style="width: 700px;">
+        <caption align="top">
+            <h3><b>회원명단</b></h3>
+        </caption>
+
+        <tr class="table-primary">
         <th width="100">번호</th>
         <th width="170">회원명</th>
         <th width="150">아이디</th>

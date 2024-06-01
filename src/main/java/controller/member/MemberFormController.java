@@ -55,7 +55,6 @@ public class MemberFormController {
         } catch (IllegalStateException | IOException e) {
             e.printStackTrace();
         }
-
         //db에 저장
         memberService.insertMember(dto);
 

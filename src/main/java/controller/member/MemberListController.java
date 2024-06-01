@@ -37,5 +37,4 @@ public class MemberListController {
         model.addAttribute("dto", dto);
         return "member/detailpage";
     }
-    
 }
