@@ -7,7 +7,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>로그인</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- 부트스트랩 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- 사용자 정의 CSS -->
@@ -57,14 +60,43 @@
         }
     </style>
 </head>
-<body>
+<c:set var="root" value="<%=request.getContextPath()%>"/>
+<script type="text/javascript">
+    $(function(){
+        $("#loginfrm").submit(function(e){
+            //기본 이벤트 무효화
+            e.preventDefault();
+            //폼안의 입력값 읽기
+            let fdata=$(this).serialize();
+            alert(fdata);
+            $.ajax({
+                type:"get",
+                dataType:"json",
+                url:"${root}/member/login",
+                data:fdata,
+                success:function(data){
+                    if(data.status=='success'){
+                        window.location.href = "../";
+                    }else{
+                        alert("아이디 또는 비밀번호가 맞지 않습니다");
+                    }
+                }
+            });
+        });
 
+    });//close function
+</script>
+<body>
 <div class="container">
     <h3 class="text-center mb-4">로그인</h3>
-    <form action="./login" method="post" enctype="multipart/form-data">
+    <form id="loginfrm" action="<%=request.getContextPath()%>/member/login" method="get" enctype="multipart/form-data">
         <div class="form-group-id" style="width: 300px;">
             <label for="userId">아이디</label>
-            <input type="text" id="userId" name="userId" class="form-control" required>
+            <input type="text" id="userId" name="userId" class="form-control"
+                   value="${sessionScope.saveid!=null and sessionScope.saveid=='yes'?
+                               sessionScope.loginid:''}" required>
+            <input type="checkbox" id="saveid" name="saveid" ${sessionScope.saveid=null or sessionScope.saveid=='no'?"":"checked"}>&nbsp;아이디저장
+
         </div>
 
         <div class="form-group">

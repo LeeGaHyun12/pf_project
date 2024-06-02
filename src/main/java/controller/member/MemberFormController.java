@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
@@ -22,11 +23,6 @@ public class MemberFormController {
     @GetMapping("/member/form")
     public String form(){
         return "member/form";
-    }
-
-    @GetMapping("/member/login")
-    public String login(){
-        return "member/login";
     }
 
     @ResponseBody //json으로 반환
@@ -47,6 +43,8 @@ public class MemberFormController {
             @RequestParam("myfile")MultipartFile myfile,
             HttpServletRequest request
     ){
+        // 서블릿 컨텍스트 가져오기
+        ServletContext context = request.getServletContext();
         //업로드될 경로
         String savePath=request.getSession().getServletContext().getRealPath("/profile");
         //업로드한 파일의 확장자 분리
@@ -57,7 +55,7 @@ public class MemberFormController {
 
         //실제 업로드
         try {
-            myfile.transferTo(new File(savePath+"/"+photoname));
+            myfile.transferTo(new File(savePath+File.separator+photoname));
         } catch (IllegalStateException | IOException e) {
             e.printStackTrace();
         }
@@ -67,5 +65,7 @@ public class MemberFormController {
         return "redirect:/member/login";
 
     }
+
+
 
 }

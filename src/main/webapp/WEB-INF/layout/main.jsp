@@ -26,9 +26,6 @@
     </style>
 </head>
 <body>
-<<<<<<< HEAD
-Home
-=======
 <div class="container">
     <div class="box">1</div>
     <div class="box">2</div>
