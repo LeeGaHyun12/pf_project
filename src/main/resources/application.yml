@@ -9,19 +9,26 @@ spring:
 #    view:
 #      prefix: /WEB-INF/
 #      suffix: .jsp
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
 
-#mysql setting
+
+##gangsa mysql db
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://db-n8650-kr.vpc-pub-cdb.ntruss.com:3306/pp?serverTimezone=Asia/Seoul
+#    username: study
+#    password: bitcamp!@#123
+
+
+#mysql bit701
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/pp?serverTimezone=Asia/Seoul
     username: root
-    password: root1234
-
-##gangsa mysql db
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://db-n8650-kr.vpc-pub-cdb.ntruss.com:3306/studydb?serverTimezone=Asia/Seoul
-#    username: study
-#    password: bitcamp!@#123
+    password: 35373537
 
 #mybatis setting
 mybatis:
