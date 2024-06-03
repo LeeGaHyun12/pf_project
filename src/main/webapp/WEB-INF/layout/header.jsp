@@ -124,7 +124,9 @@
 <div class="header">
         <div class="title">title</div>
     <div class="rightbox">
-        <div class="search"><input type="text" placeholder=" Search..."></div>
+        <div class="search">
+            <input type="text" id="searchinput" placeholder=" Search...">
+        </div>
         <c:if test="${sessionScope.loginok==null}">
         <div class="login"><button class="btnlogin" onclick="location.href='/member/loginform'">login</button></div>
         <div class="signup"><button class="btnsignup" onclick="location.href='/member/form'">sign up</button></div>

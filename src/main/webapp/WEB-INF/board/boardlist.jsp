@@ -63,28 +63,36 @@
       font-size: 20px;
     }
 
+
     /* 아이콘 스타일 */
     .icons {
       display: flex;
       align-items: center;
       font-size: 20px;
     }
+
+
   </style>
 </head>
 <body>
-
+<c:set var="root" value="<%=request.getContextPath()%>"/>
 <div class="container">
   <c:forEach var="dto" items="${boardList}">
     <div class="box">
-      <div class="box_background"><img src="${dto.port_photo}"> </div>
+      <div class="box_background"><img src="../photo/${dto.port_photo}"> </div>
+
       <div class="content">
         <p class="userId" style="margin: 0;">${dto.userId}</p>
         <div class="icons">
           <i class="bi bi-heart-fill" style="margin-right: 5px;"></i> <!-- 하트 아이콘 -->
+          <span style="color: white; margin: 10px;">${dto.like_count}</span>
           <i class="bi bi-eye-fill"></i> <!-- 조회 아이콘 -->
+          <span style="color: white; margin: 10px;">${dto.count}</span>
         </div>
       </div>
     </div>
+
+
   </c:forEach>
 </div>
 </body>

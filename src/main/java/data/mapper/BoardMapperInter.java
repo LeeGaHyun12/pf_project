@@ -12,8 +12,8 @@ import java.util.Map;
 @Mapper
 public interface BoardMapperInter {
     @Insert("""
-			insert into portfolio (port_Id,subject,userId,port_photo,content,count,like_count,category,date)
-			values (#{port_Id},#{subject},#{userId},#{port_photo},#{content},#{count},#{like_count},#{category},now())
+			insert into portfolio (subject,userId,port_Id,port_photo,content,count,like_count,category,date)
+			values (#{subject},#{userId},#{port_Id},#{port_photo},#{content},#{count},#{like_count},#{category},now())
 			""")
     public void insertBoard(BoardDto dto);
 
