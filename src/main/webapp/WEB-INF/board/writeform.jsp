@@ -87,8 +87,8 @@
 
 <c:if test="${sessionScope.loginok==null}">
     <script type="text/javascript">
-        /*alert("먼저 로그인후 글을 작성해주세요");*/
-        /*history.back();*/
+        alert("먼저 로그인후 글을 작성해주세요");
+        history.back();
     </script>
 </c:if>
 
