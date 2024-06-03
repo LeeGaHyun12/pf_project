@@ -12,8 +12,11 @@ public class BoardService {
     @Autowired
     private BoardMapperInter svInter;
 
+
     public void insertBoard(BoardDto dto){
+
         svInter.insertBoard(dto);
+
     }
 
     public List<BoardDto> getAllPortfolios() {

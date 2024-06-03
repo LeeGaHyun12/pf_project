@@ -31,28 +31,23 @@
             border-radius: 10px;
             border: 0.2px solid black;
         }
-        input[type="button"] {
+
+        button{
             border-radius: 10px;
             border: 0.2px solid white;
             margin: 5px; /* 버튼 간격 추가 */
             flex: 1 1 30%; /* 버튼이 30%의 폭을 차지하도록 설정 */
             text-align: center;
         }
+        button.selected {
+            background-color: #ea4c89;
+            color: white;
+        }
         label {
             line-height: 1.9rem;
         }
-        input[type="submit"] {
-            padding: 3px;
-            margin-top: 0.6rem;
-            font-family: cursive;
-            font-weight: bold;
-            border-radius: 50px;
-            border: 1px solid #ea4c89;
-            width: 80px;
-            background-color: #ea4c89;
-            color: white;
 
-        }
+
         fieldset {
             padding: 20px 40px;
         }
@@ -75,7 +70,17 @@
                     }
                     reader.readAsDataURL($(this)[0].files[0]);
                 }
+
             });
+            $('button.category-btn').click(function() {
+                // Remove 'selected' class from all buttons
+                $('button.category-btn').removeClass('selected');
+                // Add 'selected' class to the clicked button
+                $(this).addClass('selected');
+                // Set the value of the hidden input to the clicked button's value
+                $('#category').val($(this).val());
+            });
+
         });
     </script>
 </head>
@@ -89,8 +94,10 @@
 
 <body>
 <form action="./upload" method="post" enctype="multipart/form-data">
+
     <fieldset>
         <legend>게시물 작성</legend>
+
         <div class="form-control">
             <label for="subject">제목</label>
             <input type="text" id="subject" name="subject" placeholder="Enter your name" required />
@@ -100,31 +107,24 @@
             <label for="upload">파일 업로드</label>
             <input type="file" id="upload" name="upload" required/>
         </div>
-        <div class="form-control">
-            <label for="port_Id">port_Id</label>
-            <input type="text" id="port_Id" name="port_Id" placeholder="Enter your name" required />
-        </div>
-        <div class="form-control">
-            <label for="userId">userId</label>
-            <input type="text" id="userId" name="userId" placeholder="Enter your name" required />
-        </div>
+
         <div class="form-control">
             <label>분류</label>
-            <br>
-            <input type='button' value='그래픽 디자인'/>
-            <input type='button' value='브랜딩/편집'/>
-            <input type='button' value='영상/모션그래픽'/>
-            <input type='button' value='UI/UX'/>
-            <br>
-            <input type='button' value='캐릭터 디자인'/>
-            <input type='button' value='제품/패키지 디자인'/>
-            <input type='button' value='디지털 아트'/>
-            <input type='button' value='타이포그래피'/>
-            <br>
-            <input type='button' value='일러스트레이션'/>
-            <input type='button' value='포토그래피'/>
-            <input type='button' value='파인아트'/>
-            <input type='button' value='공예'/>
+            <div>
+                <button type="button" class="category-btn" value="graphic_design">그래픽 디자인</button>
+                <button type="button" class="category-btn" value="branding_editing">브랜딩/편집</button>
+                <button type="button" class="category-btn" value="video_motion_graphics">영상/모션그래픽</button>
+                <button type="button" class="category-btn" value="ui_ux">UI/UX</button>
+                <button type="button" class="category-btn" value="character_design">캐릭터 디자인</button>
+                <button type="button" class="category-btn" value="product_package_design">제품/패키지 디자인</button>
+                <button type="button" class="category-btn" value="digital_art">디지털 아트</button>
+                <button type="button" class="category-btn" value="typography">타이포그래피</button>
+                <button type="button" class="category-btn" value="illustration">일러스트레이션</button>
+                <button type="button" class="category-btn" value="photography">포토그래피</button>
+                <button type="button" class="category-btn" value="fine_art">파인아트</button>
+                <button type="button" class="category-btn" value="craft">공예</button>
+            </div>
+            <input type="hidden" id="category" name="category" required>
         </div>
         <div class="form-control">
             <label for="content">Message</label>
@@ -139,6 +139,7 @@
         </div>
         <input type="submit" value="전송" class="submit-btn" />
     </fieldset>
+
 </form>
 </body>
 </html>
