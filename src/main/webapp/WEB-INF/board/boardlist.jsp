@@ -146,7 +146,31 @@
     }
 
   </style>
+  <script>
+    $(document).ready(function() {
+      $('.box').on('click', function() {
+        var num = $(this).data('num');
 
+        $.ajax({
+          url: '/getData',
+          type: 'GET',
+          data: { num: num},
+          success: function(data) {
+            console.log('Image URL:', data.port_photo);
+            $('#portfolio-number').text(data.num);
+            $('#portfolio-photo').attr('src','../photo/'+data.port_photo);
+            $('#portfolio-subject').text(data.subject);
+            $('#portfolio-content').text(data.content);
+
+            $('#myModal').modal('show');
+          },
+          error: function(xhr, status, error) {
+            console.error(xhr.responseText);
+          }
+        });
+      });
+    });
+  </script>
 </head>
 <body>
 
@@ -166,10 +190,9 @@
   <button class="ctbutton">공예</button>
 </div>
 
-<c:set var="root" value="<%=request.getContextPath()%>"/>
 <div class="container">
   <c:forEach var="dto" items="${boardList}">
-    <div class="box">
+    <div class="box" data-num="${dto.num}">
       <div class="box_background"><img src="../photo/${dto.port_photo}"> </div>
 
       <div class="content">
@@ -184,7 +207,6 @@
       </div>
     </div>
 
-
   </c:forEach>
 </div>
 
@@ -196,7 +218,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body" id="portfolio-details">
-        <img id="portfolio-photo" src="<c:url value='/image/h.jpg'/>" alt="Portfolio Photo">
+        <img id="portfolio-photo" src="" alt="Portfolio Photo">
       </div>
       <div class="modal-footer">
         <a><strong>Portfolio Number:</strong> <span id="portfolio-number"></span></a>
@@ -205,31 +227,6 @@
     </div>
   </div>
 </div>
-
-<script>
-  $(document).ready(function() {
-    $('.box').on('click', function() {
-      var num = $(this).data('num');
-
-      $.ajax({
-        url: '/getData',
-        type: 'GET',
-        data: { num: num },
-        success: function(data) {
-          $('#portfolio-number').text(data.num);
-          /*$('#portfolio-photo').attr('src', data.port_photo);*/
-          $('#portfolio-subject').text(data.subject);
-          $('#portfolio-content').text(data.content);
-
-          $('#myModal').modal('show');
-        },
-        error: function(xhr, status, error) {
-          console.error(xhr.responseText);
-        }
-      });
-    });
-  });
-</script>
 
 </body>
 </html>
