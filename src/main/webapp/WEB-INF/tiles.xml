@@ -20,8 +20,9 @@
     <definition name="board/writeform" template="/WEB-INF/board/writeform.jsp"/>
 
 
-    <!-- board/boardlist 추가 -->
-<!--    <definition name="board/boardlist" extends="mainLayout">-->
-<!--        <put-attribute name="board/boardlist" value="/WEB-INF/board/boardlist.jsp"/>-->
-<!--    </definition>-->
+
+    <definition name="board/boardlist" extends="mainLayout">
+        <put-attribute name="main" value="/WEB-INF/board/boardlist.jsp"/>
+    </definition>
+
 </tiles-definitions>
