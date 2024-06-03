@@ -23,4 +23,8 @@ public class BoardService {
         return svInter.getAllPortfolios();
     }
 
+    public BoardDto getBoardByNum(int num) {
+        return svInter.getBoardByNum(num);
+    }
+
 }

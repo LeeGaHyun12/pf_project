@@ -37,7 +37,7 @@
     div.mainlayout>div.main{
         width: 100%;
         height: 1000px;
-        top: 660px;
+        top: 640px;
         line-height:100px;
         font-size: 35px;
         text-align: center;
