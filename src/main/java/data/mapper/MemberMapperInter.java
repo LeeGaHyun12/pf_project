@@ -35,5 +35,5 @@ public interface MemberMapperInter {
     @Select("""
 			select count(*) from user where userId=#{userId} and passwd=#{passwd}
 			""")
-    public int isLoginCheck(String userId,String pass);
+    public int isLoginCheck(String userId,String passwd);
 }

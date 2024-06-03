@@ -34,9 +34,9 @@ public class MemberService {
     {
         return memInter.getData(num);
     }
-    public MemberDto getDataById(String myid)
+    public MemberDto getDataById(String userId)
     {
-        return memInter.getDataById(myid);
+        return memInter.getDataById(userId);
     }
 
     public boolean isEqualPassCheck(int num,String passwd)
@@ -48,8 +48,9 @@ public class MemberService {
         return n==1?true:false;
     }
 
-    public boolean isLoginCheck(String user_Id,String passwd)
+    public boolean isLoginCheck(String userId,String passwd)
     {
-        return memInter.isLoginCheck(user_Id, passwd)==1?true:false;
+        return memInter.isLoginCheck(userId, passwd)==1?true:false;
     }
 }
+

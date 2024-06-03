@@ -95,7 +95,7 @@
         <div class="title">title</div>
     <div class="rightbox">
         <div class="search"><input type="text" placeholder=" Search..."></div>
-        <div class="login"><button class="btnlogin" onclick="location.href='/member/login'">login</button></div>
+        <div class="login"><button class="btnlogin" onclick="location.href='/member/loginform'">login</button></div>
         <div class="signup"><button class="btnsignup" onclick="location.href='/member/form'">sign up</button></div>
     </div>
 

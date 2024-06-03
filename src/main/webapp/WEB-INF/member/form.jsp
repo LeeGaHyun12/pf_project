@@ -129,7 +129,7 @@
         }
     </script>
 </head>
-<body>
+<body style="background-color: black">
 
 <div class="container">
     <h3 class="text-center mb-4">회원 가입</h3>
@@ -167,33 +167,35 @@
 
         </div>
 
-
-        <table style="width: 300px;">
-            <tr>
-                <td><input type="checkbox" id="graphic_design" name="graphic_design"><label for="graphic_design">그래픽 디자인</label></td>
-                <td><input type="checkbox" id="branding_editing" name="branding_editing"><label for="branding_editing">브랜딩/편집</label></td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" id="video_motion_graphics" name="video_motion_graphics"><label for="video_motion_graphics">영상/모션그래픽</label></td>
-                <td><input type="checkbox" id="ui_ux" name="ui_ux"><label for="ui_ux">UI/UX</label></td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" id="character_design" name="character_design"><label for="character_design">캐릭터 디자인</label></td>
-                <td><input type="checkbox" id="product_package_design" name="product_package_design"><label for="product_package_design">제품/패키지 디자인</label></td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" id="digital_art" name="digital_art"><label for="digital_art">디지털 아트</label></td>
-                <td><input type="checkbox" id="typography" name="typography"><label for="typography">타이포그래피</label></td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" id="illustration" name="illustration"><label for="illustration">일러스트레이션</label></td>
-                <td><input type="checkbox" id="photography" name="photography"><label for="photography">포토그래피</label></td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" id="fine_art" name="fine_art"><label for="fine_art">파인아트</label></td>
-                <td><input type="checkbox" id="craft" name="craft"><label for="craft">공예</label></td>
-            </tr>
-        </table>
+        <div class="form-group">
+            <label for="category">분야</label>
+            <table class="table">
+                <tr>
+                    <td><input type="checkbox" id="graphic_design" name="category" value="graphic_design"><label for="graphic_design">그래픽 디자인</label></td>
+                    <td><input type="checkbox" id="branding_editing" name="category" value="branding_editing"><label for="branding_editing">브랜딩/편집</label></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" id="video_motion_graphics" name="category" value="video_motion_graphics"><label for="video_motion_graphics">영상/모션그래픽</label></td>
+                    <td><input type="checkbox" id="ui_ux" name="category" value="ui_ux"><label for="ui_ux">UI/UX</label></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" id="character_design" name="categories" value="character_design"><label for="character_design">캐릭터 디자인</label></td>
+                    <td><input type="checkbox" id="product_package_design" name="category" value="product_package_design"><label for="product_package_design">제품/패키지 디자인</label></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" id="digital_art" name="category" value="digital_art"><label for="digital_art">디지털 아트</label></td>
+                    <td><input type="checkbox" id="typography" name="category" value="typography"><label for="typography">타이포그래피</label></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" id="illustration" name="category" value="illustration"><label for="illustration">일러스트레이션</label></td>
+                    <td><input type="checkbox" id="photography" name="category" value="photography"><label for="photography">포토그래피</label></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" id="fine_art" name="category" value="fine_art"><label for="fine_art">파인아트</label></td>
+                    <td><input type="checkbox" id="craft" name="category" value="craft"><label for="craft">공예</label></td>
+                </tr>
+            </table>
+        </div>
 
 
         <div class="form-group text-center">
@@ -203,7 +205,7 @@
     </form>
 </div>
 
-<!-- 부트스트랩 JS -->
+<!— 부트스트랩 JS —>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
