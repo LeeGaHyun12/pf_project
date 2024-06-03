@@ -4,12 +4,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+
     <style>
         .container {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-around;
             padding: 1px;
+            border: 1px solid rebeccapurple;
 
         }
         .box {
@@ -26,6 +30,7 @@
     </style>
 </head>
 <body>
+
 <div class="container">
     <div class="box">1</div>
     <div class="box">2</div>
@@ -44,6 +49,7 @@
     <div class="box">15</div>
     <div class="box">16</div>
 </div>
->>>>>>> 412b974395b8fbb1a1ff750554dc4ab9d5008106
+
+
 </body>
 </html>

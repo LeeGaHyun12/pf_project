@@ -70,6 +70,8 @@
             //폼안의 입력값 읽기
             let fdata=$(this).serialize();
 
+
+
             $.ajax({
                 type:"get",
                 dataType:"json",

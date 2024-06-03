@@ -53,3 +53,4 @@ public class MemberService {
         return memInter.isLoginCheck(userId, passwd)==1?true:false;
     }
 }
+

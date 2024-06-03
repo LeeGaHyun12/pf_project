@@ -29,6 +29,7 @@ public class MemberFormController {
     @GetMapping("/member/idcheck")
     public Map<String , Integer> getIdCheck(
             @RequestParam String searchid
+
     ){
         Map<String ,Integer> map=new HashMap<>();
         int count = memberService.getIdCheckCount(searchid);
