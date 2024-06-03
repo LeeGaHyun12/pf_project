@@ -69,6 +69,7 @@
             e.preventDefault();
             //폼안의 입력값 읽기
             let fdata=$(this).serialize();
+            alert(fdata);
 
             $.ajax({
                 type:"get",
