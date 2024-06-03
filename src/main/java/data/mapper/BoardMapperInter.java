@@ -21,5 +21,5 @@ public interface BoardMapperInter {
 	List<BoardDto> getAllPortfolios();
 
 	@Select("select * from portfolio where num = #{num}")
-	BoardDto getPortfolioByNum(int num);
+	BoardDto getBoardByNum(int num);
 }

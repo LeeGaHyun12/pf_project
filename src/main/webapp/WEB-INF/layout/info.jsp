@@ -65,6 +65,7 @@
             object-fit: cover; /* Add this */
             border-radius: 20px; /* Optional: match border-radius of .banner */
         }
+
     </style>
 </head>
 
@@ -76,6 +77,7 @@
     <div class="banner">4</div>
     <div class="banner">5</div>
 </div>
+
 </body>
 
 </html>
