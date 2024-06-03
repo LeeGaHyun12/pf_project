@@ -7,6 +7,7 @@
         <put-attribute name="menu" value="/WEB-INF/layout/menu.jsp"/>
         <put-attribute name="info" value="/WEB-INF/layout/info.jsp"/>
         <put-attribute name="main" value="/WEB-INF/layout/main.jsp"/>
+        <put-attribute name="board" value="/WEB-INF/board/boardlist.jsp"/>
     </definition>
     <!--macro-->
     <definition name="*/*" extends="mainLayout">
@@ -17,4 +18,10 @@
     <definition name="member/form" template="/WEB-INF/member/form.jsp"/>
     <definition name="member/login" template="/WEB-INF/member/login.jsp"/>
     <definition name="board/writeform" template="/WEB-INF/board/writeform.jsp"/>
+
+
+    <!-- board/boardlist 추가 -->
+<!--    <definition name="board/boardlist" extends="mainLayout">-->
+<!--        <put-attribute name="board/boardlist" value="/WEB-INF/board/boardlist.jsp"/>-->
+<!--    </definition>-->
 </tiles-definitions>

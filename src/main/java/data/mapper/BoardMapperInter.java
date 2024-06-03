@@ -16,4 +16,10 @@ public interface BoardMapperInter {
 			values (#{port_Id},#{subject},#{userId},#{port_photo},#{content},#{count},#{like_count},#{category},now())
 			""")
     public void insertBoard(BoardDto dto);
+
+	@Select("select * from portfolio")
+	List<BoardDto> getAllPortfolios();
+
+	@Select("select * from portfolio where num = #{num}")
+	BoardDto getPortfolioByNum(int num);
 }

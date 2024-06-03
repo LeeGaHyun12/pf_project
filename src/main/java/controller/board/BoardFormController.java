@@ -20,7 +20,6 @@ import java.util.UUID;
 public class BoardFormController {
     @Autowired
     private BoardService boardService;
-
     //게시물 작성
     @GetMapping("/board/writeform")
     public String form() {
@@ -61,7 +60,7 @@ public class BoardFormController {
         //db에 저장
         boardService.insertBoard(dto);
 
-        return "redirect:/member/loginform";
+        return "redirect:/";
 
     }
 }

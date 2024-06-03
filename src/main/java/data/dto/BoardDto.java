@@ -24,4 +24,5 @@ public class BoardDto {
     private int count;
     private int like_count;
     private String category;
+
 }

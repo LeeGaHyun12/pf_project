@@ -4,4 +4,5 @@
     <!--    <select id="getTotalCount" resultType="int"> &lt;!&ndash;메서드 아이디와 이름을 똑같이 주면 자동호출된다&ndash;&gt;-->
     <!--        select count(*) from memberdb;-->
     <!--    </select>-->
+
 </mapper>
