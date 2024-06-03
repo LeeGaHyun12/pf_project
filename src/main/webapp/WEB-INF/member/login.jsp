@@ -15,6 +15,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- 사용자 정의 CSS -->
     <style>
+
         @font-face {
             font-family : 'YangjuByeolsanA1';
             src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2405@1.0/YangjuByeolsanA1.woff2') format('woff2');
@@ -68,7 +69,7 @@
             e.preventDefault();
             //폼안의 입력값 읽기
             let fdata=$(this).serialize();
-            alert(fdata);
+
             $.ajax({
                 type:"get",
                 dataType:"json",
@@ -86,7 +87,7 @@
 
     });//close function
 </script>
-<body>
+<body style="background-color: black;">
 <div class="container">
     <h3 class="text-center mb-4">로그인</h3>
     <form id="loginfrm" action="<%=request.getContextPath()%>/member/login" method="get" enctype="multipart/form-data">
