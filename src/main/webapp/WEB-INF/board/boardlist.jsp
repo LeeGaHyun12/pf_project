@@ -63,8 +63,6 @@
       font-size: 20px;
     }
 
-
-
     /* 아이콘 스타일 */
 
     .icons {
@@ -107,27 +105,38 @@
 
     .modal-body {
       height: 80vh; /* 화면 높이의 80%로 설정 */
-
-
     }
 
     .modal-footer {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
       background-color: #f8f9fa;
       border-top: 1px solid #dee2e6;
       font-size: 20px;
-      line-height: 1; /* 텍스트의 줄 간격을 최소화하여 풋의 높이를 줄입니다. */
+      padding: 20px;
+    }
+    .modal-footer a,
+    .modal-footer p {
+      margin: 0;
+      width: 100%;
+      font-size: 16px;
+      line-height: 1.5; /* 줄 간격 조정 */
     }
 
-    .buttonbox{
+    .buttonbox {
       display: flex;
-      justify-content: center;
-      align-items: center;
-
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+      gap: 8px;
     }
+
+    .buttonbox::-webkit-scrollbar {
+      display: none; /* Hide scrollbar for WebKit browsers */
+    }
+
     /*카테고리 버튼*/
     .ctbutton{
       width:auto;
@@ -142,14 +151,62 @@
       justify-content: center;
       align-items: center;
       margin: 8px;
-
+      padding: 0 20px;
     }
 
   </style>
   <script>
     $(document).ready(function() {
+
+      // Like button click event
+      $('.bi-heart-fill').on('click', function() {
+        var $icon = $(this);
+        var $likeCount = $icon.next('span');
+        var num = $icon.closest('.box').data('num');
+
+        $.ajax({
+          url: '/likePost',
+          type: 'POST',
+          data: { num: num },
+          success: function(data) {
+            if (data.success) {
+              // Increase like count
+              var currentCount = parseInt($likeCount.text());
+              $likeCount.text(currentCount + 1);
+              // Change icon color
+              $icon.css('color', 'red');
+              location.reload();
+            }
+          },
+          error: function(xhr, status, error) {
+            console.error(xhr.responseText);
+          }
+        });
+      });
+
       $('.box').on('click', function() {
         var num = $(this).data('num');
+
+        // Increase view count
+        $.ajax({
+          url: '/increaseCount',
+          type: 'POST',
+          data: { num: num },
+          success: function(data) {
+            if (data.success) {
+              location.reload();
+              // Update the view count in the UI
+              var $viewCount = $('.box[data-num="' + num + '"]').find('.bi-eye-fill').next('span');
+              var currentCount = parseInt($viewCount.text());
+              $viewCount.text(currentCount + 1);
+
+
+            }
+          },
+          error: function(xhr, status, error) {
+            console.error(xhr.responseText);
+          }
+        });
 
         $.ajax({
           url: '/getData',
@@ -169,6 +226,29 @@
           }
         });
       });
+
+      // 모달이 닫힐 때 이전 페이지로 이동하는 함수
+      function closeModalAndReload() {
+        $('#myModal').modal('hide'); // 모달을 닫음
+        window.location.reload(); // 이전 페이지로 새로 고침
+      }
+
+      // 모달 닫힘 이벤트 리스너 등록
+      $('#myModal').on('hidden.bs.modal', function () {
+        closeModalAndReload(); // 모달이 닫히면 이전 페이지로 이동
+      });
+
+
+      // Scroll buttons
+      $('#scroll-left').on('click', function() {
+        $('.buttonbox').scrollLeft($('.buttonbox').scrollLeft() - 100);
+      });
+
+      $('#scroll-right').on('click', function() {
+        $('.buttonbox').scrollLeft($('.buttonbox').scrollLeft() + 100);
+      });
+
+
     });
   </script>
 </head>
@@ -192,22 +272,24 @@
 
 <div class="container">
   <c:forEach var="dto" items="${boardList}">
-    <div class="box" data-num="${dto.num}">
+    <div class="box" data-num="${dto.num}" data-category="${dto.category}">
       <div class="box_background"><img src="../photo/${dto.port_photo}"> </div>
 
       <div class="content">
         <p class="userId" style="margin: 0;">${dto.userId}</p>
         <div class="icons">
-          <i class="bi bi-heart-fill" style="margin-right: 5px;"></i> <!-- 하트 아이콘 -->
-          <span style="color: white; margin: 10px;">${dto.like_count}</span>
-          <i class="bi bi-eye-fill"></i> <!-- 조회 아이콘 -->
-          <span style="color: white; margin: 10px;">${dto.count}</span>
+          <i class="bi bi-heart-fill" style="margin-right: 5px;">
+            <span style="color: white; margin: 10px;">${dto.like_count}</span>
+          </i> <!-- 하트 아이콘 -->
 
+          <i class="bi bi-eye-fill"> <!-- 조회 아이콘 -->
+          <span style="color: white; margin: 10px;">${dto.count}</span>
+          </i>
         </div>
       </div>
     </div>
-
   </c:forEach>
+
 </div>
 
 <div id="myModal" class="modal fade" role="dialog">

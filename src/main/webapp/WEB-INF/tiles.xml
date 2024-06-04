@@ -26,4 +26,7 @@
     </definition>
 
 
+    <definition name="board/search" extends="mainLayout">
+        <put-attribute name="main" value="/WEB-INF/board/searchlist.jsp"/>
+    </definition>
 </tiles-definitions>

@@ -15,20 +15,20 @@ spring:
       max-request-size: 10MB
 
 
-##gangsa mysql db
-#  datasource:
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://db-n8650-kr.vpc-pub-cdb.ntruss.com:3306/pp?serverTimezone=Asia/Seoul
-#    username: study
-#    password: bitcamp!@#123
-
-
-#mysql bit701
+#gangsa mysql db
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/pp?serverTimezone=Asia/Seoul
-    username: root
-    password: 35373537
+    url: jdbc:mysql://db-n9jk3-kr.vpc-pub-cdb.ntruss.com:3306/pp?serverTimezone=Asia/Seoul
+    username: study
+    password: bitcamp!@#123
+
+
+##mysql bit701
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/pp?serverTimezone=Asia/Seoul
+#    username: root
+#    password: 35373537
 
 #mybatis setting
 mybatis:
