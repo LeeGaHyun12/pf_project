@@ -48,6 +48,7 @@ public class BoardFormController {
         //업로드할 파일명
         String photoname = UUID.randomUUID() + ext;
 
+
         try {
                 upload.transferTo(new File(savePath+"/"+photoname));
             } catch (IllegalStateException|IOException e) {

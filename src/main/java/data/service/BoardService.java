@@ -33,6 +33,11 @@ public class BoardService {
     }
 
 
+    public List<BoardDto> getBoardByCategory(String category) {
+        return svInter.getBoardByCategory(category);
+    }
+
+
     public void increaseLikeCount(int num) {
         svInter.updateLikeCount(num);
     }

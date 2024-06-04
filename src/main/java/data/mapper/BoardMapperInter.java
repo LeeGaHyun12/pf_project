@@ -21,6 +21,10 @@ public interface BoardMapperInter {
 	@Select("select * from portfolio where num = #{num}")
 	BoardDto getBoardByNum(int num);
 
+
+	@Select("select * from portfolio where category = #{category}")
+	List<BoardDto> getBoardByCategory(String category);
+
 	@Select("select * from portfolio where category = #{keyword} OR subject LIKE CONCAT('%', #{keyword}, '%') OR category LIKE CONCAT('%', #{keyword}, '%')")
 	List<BoardDto> findKeyword(@Param("keyword") String keyword);
 
@@ -29,5 +33,6 @@ public interface BoardMapperInter {
 
 	@Update("update portfolio set count=count+1 where num=#{num}")
 	public void updateReadcount(@Param("num") int num);
+
 
 }

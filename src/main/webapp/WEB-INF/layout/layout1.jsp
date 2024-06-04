@@ -6,38 +6,45 @@
 <head>
 <style>
     div.mainlayout>div{
-        background-color: gray;
+
         position: absolute;
     }
     div.mainlayout>div.header{
         width: 100%;
-        height: 150px;
+        height: 70px;
         line-height:100px;
         font-size: 35px;
         text-align: center;
 
+
     }
-    div.mainlayout>div.menu{
+
+    div.mainlayout > div.menu {
+        background-image: url("/image/photo4.jpg");
+        background-size: cover; /* 이미지를 비율에 맞게 늘리거나 축소합니다. */
+        background-position: center; /* 이미지를 수평 및 수직으로 가운데로 정렬합니다. */
         width: 100%;
-        height: 100px;
-        top: 170px;
-        line-height:100px;
+        height: 780px;
+        top: 70px;
+        line-height: 100px;
         font-size: 35px;
         text-align: center;
-
     }
+
+
     div.mainlayout>div.info{
         width: 100%;
-        height: 340px;
-        top: 280px;
+        height: 500px;
+        top: 620px;
         line-height:100px;
         font-size: 35px;
         text-align: center;
     }
+
     div.mainlayout>div.main{
         width: 100%;
         height: 1000px;
-        top: 640px;
+        top: 950px;
         line-height:100px;
         font-size: 35px;
         text-align: center;
