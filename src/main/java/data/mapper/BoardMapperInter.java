@@ -22,4 +22,7 @@ public interface BoardMapperInter {
 
 	@Select("select * from portfolio where num = #{num}")
 	BoardDto getBoardByNum(int num);
+
+	@Select("select * from portfolio where category = #{category}")
+	List<BoardDto> getBoardByCategory(String category);
 }

@@ -27,4 +27,8 @@ public class BoardService {
         return svInter.getBoardByNum(num);
     }
 
+    public List<BoardDto> getBoardByCategory(String category) {
+        return svInter.getBoardByCategory(category);
+    }
+
 }

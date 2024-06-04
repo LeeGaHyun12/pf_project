@@ -5,8 +5,16 @@
 <html>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <head>
+    <!--폰트-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Domine:wght@400..700&display=swap" rel="stylesheet">
 <style>
 
+    body{
+
+
+    }
     div.header{
         display: flex;
         justify-content: flex-end;
@@ -20,85 +28,111 @@
     }
     div.title{
         display: flex;
-        background-color: black;
-        color: white;
+        color: black;
         width: 100px;
         height: 100px;
         justify-content: center;
         position: absolute; /* 절대 위치 지정 */
         left: 50%; /* 가로 중앙에 맞춤 */
         transform: translateX(-50%); /* 요소 너비의 절반만큼 왼쪽으로 이동 */
+        font-size: 70px;
     }
     div.search{
-        background-color: black;
         color: white;
-        width: 280px;
-        height: 150px;
+        width: 300px;
+        height: 120px;
         display: flex;
         justify-content: center;
         align-items: center;
+
     }
     input{
-        width: 350px;
+        width: 300px;
         border: 1px solid #bbb;
         border-radius: 25px;
-        padding: 10px 12px;
-        font-size: 18px;
+        padding: 10px 20px;
         height: 50px;
     }
+    div.search input::placeholder {
+        font-size: 18px; /* 플레이스홀더의 글자 크기 */
+        color: #999; /* 플레이스홀더의 색상 */
+
+    }
     div.login{
-        background-color: black;
         color: white;
-        width: 170px;
-        height: 150px;
+        width: 130px;
+        height: 120px;
         display: flex;
         justify-content: center;
         align-items: center;
 
     }
     .btnlogin{
-        width:140px;
+        width: 100%; /* 버튼을 부모 div의 너비에 맞추기 */
         height: 50px;
-        color:#fff;
-        background: #ea4c89;
+        color:#ea4c89;
+        background-color: white;
         font-size: 22px;
         border:none;
         border-radius: 35px;
-        box-shadow: 0 4px 16px rgba(0,79,255,0.3);
         transition:0.3s;
+        display: flex; /* 버튼 안의 내용물을 가로 중앙 정렬하기 위해 추가 */
+        justify-content: center; /* 버튼 안의 내용물을 가로 중앙 정렬하기 위해 추가 */
+        align-items: center; /* 버튼 안의 내용물을 세로 중앙 정렬하기 위해 추가 */
 
     }
+    div.logout{
+        color: white;
+        width: 130px;
+        height: 120px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
     .btnlogout{
-        width:140px;
+        width:100%;
         height: 50px;
         color:#fff;
-        background: #ea4c89;
+        background: #ffb1b4;
         font-size: 22px;
         border:none;
         border-radius: 35px;
-        box-shadow: 0 4px 16px rgba(0,79,255,0.3);
         transition:0.3s;
+        display: flex; /* 버튼 안의 내용물을 가로 중앙 정렬하기 위해 추가 */
+        justify-content: center; /* 버튼 안의 내용물을 가로 중앙 정렬하기 위해 추가 */
+        align-items: center; /* 버튼 안의 내용물을 세로 중앙 정렬하기 위해 추가 */
     }
     div.signup{
-        background-color: black;
         color: white;
-        width: 170px;
-        height: 150px;
+        width: 130px;
+        height: 120px;
         display: flex;
         justify-content: center;
         align-items: center;
     }
 
     .btnsignup{
-        width:140px;
+        width:100%;
         height: 50px;
         color:#fff;
         background: #ea4c89;
         font-size: 22px;
         border:none;
         border-radius: 35px;
-        box-shadow: 0 4px 16px rgba(0,79,255,0.3);
         transition:0.3s;
+        display: flex; /* 버튼 안의 내용물을 가로 중앙 정렬하기 위해 추가 */
+        justify-content: center; /* 버튼 안의 내용물을 가로 중앙 정렬하기 위해 추가 */
+        align-items: center; /* 버튼 안의 내용물을 세로 중앙 정렬하기 위해 추가 */
+
+    }
+
+    .nickname{
+        color: black;
+        font-size: 23px;
+        margin-left: 10px;
+        display: flex; /* 버튼 안의 내용물을 가로 중앙 정렬하기 위해 추가 */
+        justify-content: center; /* 버튼 안의 내용물을 가로 중앙 정렬하기 위해 추가 */
+        align-items: center; /* 버튼 안의 내용물을 세로 중앙 정렬하기 위해 추가 */
     }
 </style>
     <c:set var="root" value="<%=request.getContextPath()%>"/>
@@ -135,8 +169,8 @@
 
 
         <c:if test="${sessionScope.loginok!=null}">
-            <b style="font-size: 20px;">${sessionScope.loginid}님</b>
-            <button type="button" id="btnlogout" style="margin-left: 20px;" class="btnlogout">logout</button>
+            <b class="nickname">${sessionScope.loginid}님</b>
+        <div class="logout"><button type="button" id="btnlogout" style="margin-left: 20px;" class="btnlogout">logout</button></div>
         </c:if>
 
     </div>
