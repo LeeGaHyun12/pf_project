@@ -70,7 +70,7 @@ public class BoardFormController {
 
 
         //member db로부터 아이디에 해당하는 이름을 얻어서 dto에 저장
-        String port_Id=memberService.getDataById(loginid).getName()+ UUID.randomUUID()+ext;
+        String port_Id=memberService.getDataById(loginid).getName()+photoname;
         dto.setPort_Id(port_Id);
 
         //확인할 거... 추가후 저장된 시퀀스 값

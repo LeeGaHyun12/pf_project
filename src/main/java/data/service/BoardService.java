@@ -12,12 +12,17 @@ public class BoardService {
     @Autowired
     private BoardMapperInter svInter;
 
+    public List<BoardDto> searchKeyword(String keyword){
+        return svInter.findKeyword(keyword);
+    }
+
 
     public void insertBoard(BoardDto dto){
 
         svInter.insertBoard(dto);
 
     }
+
 
     public List<BoardDto> getAllPortfolios() {
         return svInter.getAllPortfolios();
@@ -27,8 +32,19 @@ public class BoardService {
         return svInter.getBoardByNum(num);
     }
 
+
     public List<BoardDto> getBoardByCategory(String category) {
         return svInter.getBoardByCategory(category);
     }
+
+
+    public void increaseLikeCount(int num) {
+        svInter.updateLikeCount(num);
+    }
+
+    public void updateReadcount(int num){
+        svInter.updateReadcount(num);
+    }
+
 
 }

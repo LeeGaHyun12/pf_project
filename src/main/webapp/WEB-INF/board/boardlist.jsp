@@ -80,8 +80,6 @@
       font-size: 20px;
     }
 
-
-
     /* 아이콘 스타일 */
 
     .icons {
@@ -121,6 +119,7 @@
     }
 
 
+
     .modal-footer {
       background-color: #f8f9fa;
       border-top: 1px solid #dee2e6;
@@ -141,6 +140,15 @@
     .text{
       font-size: 70px;
       color: black;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+      gap: 8px;
+    }
+
+    .buttonbox::-webkit-scrollbar {
+      display: none; /* Hide scrollbar for WebKit browsers */
     }
 
     /*카테고리 버튼*/
@@ -159,6 +167,7 @@
       justify-content: center;
       align-items: center;
       margin: 8px;
+
       white-space: nowrap; /* 텍스트 줄바꿈 방지 */
       overflow: hidden; /* 넘치는 텍스트 숨기기 */
       text-overflow: ellipsis; /* 넘치는 텍스트 생략 표시 (...) */
@@ -194,11 +203,13 @@
     .icon-button i {
       font-size: 27px;
       color: #333;
+      padding: 0 20px;
     }
 
   </style>
   <script>
     $(document).ready(function() {
+
       $('.ctbutton').on('click', function() {
         var category = $(this).val();
 
@@ -222,14 +233,103 @@
             $('#portfolio-content').text(data.content);
 
             $('#myModal').modal('show');
+
+
+      // Like button click event
+      $('.bi-heart-fill').on('click', function() {
+        var $icon = $(this);
+        var $likeCount = $icon.next('span');
+        var num = $icon.closest('.box').data('num');
+
+        $.ajax({
+          url: '/likePost',
+          type: 'POST',
+          data: { num: num },
+          success: function(data) {
+            if (data.success) {
+              // Increase like count
+              var currentCount = parseInt($likeCount.text());
+              $likeCount.text(currentCount + 1);
+              // Change icon color
+              $icon.css('color', 'red');
+              location.reload();
+            }
           },
           error: function(xhr, status, error) {
             console.error(xhr.responseText);
           }
         });
       });
+
     });
 
+
+      $('.box').on('click', function() {
+        var num = $(this).data('num');
+
+        // Increase view count
+        $.ajax({
+          url: '/increaseCount',
+          type: 'POST',
+          data: { num: num },
+          success: function(data) {
+            if (data.success) {
+              location.reload();
+              // Update the view count in the UI
+              var $viewCount = $('.box[data-num="' + num + '"]').find('.bi-eye-fill').next('span');
+              var currentCount = parseInt($viewCount.text());
+              $viewCount.text(currentCount + 1);
+
+
+            }
+          },
+          error: function(xhr, status, error) {
+            console.error(xhr.responseText);
+          }
+        });
+
+        $.ajax({
+          url: '/getData',
+          type: 'GET',
+          data: { num: num},
+          success: function(data) {
+            console.log('Image URL:', data.port_photo);
+            $('#portfolio-number').text(data.num);
+            $('#portfolio-photo').attr('src','../photo/'+data.port_photo);
+            $('#portfolio-subject').text(data.subject);
+            $('#portfolio-content').text(data.content);
+
+            $('#myModal').modal('show');
+          },
+          error: function(xhr, status, error) {
+            console.error(xhr.responseText);
+          }
+        });
+      });
+
+      // 모달이 닫힐 때 이전 페이지로 이동하는 함수
+      function closeModalAndReload() {
+        $('#myModal').modal('hide'); // 모달을 닫음
+        window.location.reload(); // 이전 페이지로 새로 고침
+      }
+
+      // 모달 닫힘 이벤트 리스너 등록
+      $('#myModal').on('hidden.bs.modal', function () {
+        closeModalAndReload(); // 모달이 닫히면 이전 페이지로 이동
+      });
+
+
+      // Scroll buttons
+      $('#scroll-left').on('click', function() {
+        $('.buttonbox').scrollLeft($('.buttonbox').scrollLeft() - 100);
+      });
+
+      $('#scroll-right').on('click', function() {
+        $('.buttonbox').scrollLeft($('.buttonbox').scrollLeft() + 100);
+      });
+
+
+    });
   </script>
 </head>
 <body>
@@ -253,21 +353,26 @@
 <div class="container">
   <c:forEach var="dto" items="${boardList}">
     <div class="box" data-num="${dto.num}" data-category="${dto.category}">
+
       <div class="box_background"><img src="../photo/${dto.port_photo}"></div>
+
 
       <div class="content">
         <p class="userId" style="margin: 0;">${dto.userId}</p>
         <div class="icons">
-          <i class="bi bi-heart-fill" style="margin-right: 5px;"></i> <!-- 하트 아이콘 -->
-          <span style="color: white; margin: 10px;">${dto.like_count}</span>
-          <i class="bi bi-eye-fill"></i> <!-- 조회 아이콘 -->
-          <span style="color: white; margin: 10px;">${dto.count}</span>
+          <i class="bi bi-heart-fill" style="margin-right: 5px;">
+            <span style="color: white; margin: 10px;">${dto.like_count}</span>
+          </i> <!-- 하트 아이콘 -->
 
+          <i class="bi bi-eye-fill"> <!-- 조회 아이콘 -->
+          <span style="color: white; margin: 10px;">${dto.count}</span>
+          </i>
         </div>
       </div>
     </div>
 
   </c:forEach>
+
 </div>
 
 <div id="myModal" class="modal fade" role="dialog">
@@ -285,6 +390,7 @@
           <div class="icon-button" style="background-color: #1bcad3"><i class="bi bi-chat-dots-fill" style="color: white"></i></div>
           <div class="icon-button"><i class="bi bi-share-fill"></i></div>
         </div>
+
       </div>
       <div class="modal-footer">
         <a><strong>Portfolio Number:</strong> <span id="portfolio-number"></span></a>
