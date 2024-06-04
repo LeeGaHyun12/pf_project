@@ -6,7 +6,6 @@
 <head>
   <meta charset="UTF-8">
   <title>Insert title here</title>
-
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -118,8 +117,6 @@
       font-size: 20px; /* x버튼 사이즈 */
     }
 
-
-
     .modal-footer {
       background-color: #f8f9fa;
       border-top: 1px solid #dee2e6;
@@ -128,13 +125,19 @@
 
     .buttonbox {
       display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap; /* 버튼들이 창 크기에 맞게 줄을 바꾸도록 설정 */
-      width: 80%;
-      border: 1px solid black;
-      margin: 0 auto; /* 가로 중앙 정렬을 위해 추가 */
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+      gap: 8px;
 
+      /* 이전 스타일 유지 */
+      overflow-x: auto; /* 가로 스크롤을 허용하여 내용이 넘칠 때 스크롤 생성 */
+      white-space: nowrap; /* 버튼들이 가로로 나열되도록 함 */
+    }
+
+    .buttonbox::-webkit-scrollbar {
+      display: none; /* Hide scrollbar for WebKit browsers */
     }
 
     .text{
@@ -147,14 +150,10 @@
       gap: 8px;
     }
 
-    .buttonbox::-webkit-scrollbar {
-      display: none; /* Hide scrollbar for WebKit browsers */
-    }
-
     /*카테고리 버튼*/
     .ctbutton {
       flex: 1 1 auto; /* 버튼이 가로로 균등하게 늘어나도록 설정 */
-      max-width: 190px; /* 버튼의 최대 너비 설정 */
+      max-width: 250px; /* 버튼의 최대 너비 설정 */
       min-width: 60px; /* 버튼의 최소 너비 설정 */
       height: 50px;
       color: white;
@@ -233,35 +232,12 @@
             $('#portfolio-content').text(data.content);
 
             $('#myModal').modal('show');
-
-
-      // Like button click event
-      $('.bi-heart-fill').on('click', function() {
-        var $icon = $(this);
-        var $likeCount = $icon.next('span');
-        var num = $icon.closest('.box').data('num');
-
-        $.ajax({
-          url: '/likePost',
-          type: 'POST',
-          data: { num: num },
-          success: function(data) {
-            if (data.success) {
-              // Increase like count
-              var currentCount = parseInt($likeCount.text());
-              $likeCount.text(currentCount + 1);
-              // Change icon color
-              $icon.css('color', 'red');
-              location.reload();
-            }
           },
           error: function(xhr, status, error) {
             console.error(xhr.responseText);
           }
         });
       });
-
-    });
 
 
       $('.box').on('click', function() {
@@ -274,13 +250,10 @@
           data: { num: num },
           success: function(data) {
             if (data.success) {
-              location.reload();
               // Update the view count in the UI
               var $viewCount = $('.box[data-num="' + num + '"]').find('.bi-eye-fill').next('span');
               var currentCount = parseInt($viewCount.text());
               $viewCount.text(currentCount + 1);
-
-
             }
           },
           error: function(xhr, status, error) {
@@ -288,10 +261,11 @@
           }
         });
 
+        // 모달에 데이터를 채우고 보여주는 AJAX 요청
         $.ajax({
-          url: '/getData',
+          url: '/getData', // 데이터를 가져오는 서버 엔드포인트
           type: 'GET',
-          data: { num: num},
+          data: { num: num}, // 데이터: 포스트 번호
           success: function(data) {
             console.log('Image URL:', data.port_photo);
             $('#portfolio-number').text(data.num);
@@ -299,7 +273,7 @@
             $('#portfolio-subject').text(data.subject);
             $('#portfolio-content').text(data.content);
 
-            $('#myModal').modal('show');
+            $('#myModal').modal('show'); // 모달 표시
           },
           error: function(xhr, status, error) {
             console.error(xhr.responseText);
@@ -327,8 +301,6 @@
       $('#scroll-right').on('click', function() {
         $('.buttonbox').scrollLeft($('.buttonbox').scrollLeft() + 100);
       });
-
-
     });
   </script>
 </head>
@@ -365,12 +337,11 @@
           </i> <!-- 하트 아이콘 -->
 
           <i class="bi bi-eye-fill"> <!-- 조회 아이콘 -->
-          <span style="color: white; margin: 10px;">${dto.count}</span>
+            <span style="color: white; margin: 10px;">${dto.count}</span>
           </i>
         </div>
       </div>
     </div>
-
   </c:forEach>
 
 </div>
