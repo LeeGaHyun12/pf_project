@@ -116,17 +116,24 @@
                     }
                 })
             });
+
+            $("#searchInput").keypress(function(event) {
+                if (event.which === 13) {
+                    let keyword = $("#searchInput").val();
+                    window.location.href = `${root}/board/search?keyword=` + keyword;
+                }
+            });
         });//close function
     </script>
 </head>
 <body>
 <!--test-->
 <div class="header">
-        <div class="title">title</div>
+        <div class="title" onclick="location.href='/board/boardlist'">title</div>
     <div class="rightbox">
 
 
-        <div class="search"><input type="text" placeholder=" Search..."></div>
+        <div class="search"><input type="text" id="searchInput" placeholder=" Search..."></div>
 
         <c:if test="${sessionScope.loginok==null}">
         <div class="login"><button class="btnlogin" onclick="location.href='/member/loginform'">login</button></div>
@@ -137,11 +144,12 @@
         <c:if test="${sessionScope.loginok!=null}">
             <b style="font-size: 20px;">${sessionScope.loginid}님</b>
             <button type="button" id="btnlogout" style="margin-left: 20px;" class="btnlogout">logout</button>
+            <button type="button" id="btnlogout" style="margin-left: 20px;" class="btnlogout" onclick="location.href=''">mypage</button>
+
         </c:if>
 
     </div>
-
-
 </div>
+
 </body>
 </html>

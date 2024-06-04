@@ -20,4 +20,5 @@ public class BoardListController {
         model.addAttribute("boardList", boardList);
         return "board/boardlist";
     }
+
 }
