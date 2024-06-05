@@ -8,8 +8,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -21,21 +25,25 @@ public class MemberListController {
     @GetMapping("/member/list")
     public String memberList(Model model)
     {
-        int totalCount=memberService.getTotalCount();
         List<MemberDto> list=memberService.getAllMembers();
 
         model.addAttribute("list",list);
-        model.addAttribute("totalCount", totalCount);
 
-
-        return "member/memberlist";
+        return "list";
     }
 
-    @GetMapping("/member/detail")
-    public String detail(@RequestParam int num, Model model)
-    {
-        MemberDto dto=memberService.getData(num);
-        model.addAttribute("dto", dto);
-        return "member/detailpage";
+    @ResponseBody
+    @GetMapping("/profile")
+    public Map<String, String> getProf(@RequestParam("num") int num){
+        System.out.println(num);
+        String prof=memberService.getProf(num);
+        Map<String, String> map=new HashMap<>();
+
+        map.put("prof_photo",prof);
+
+        return map;
     }
+
+
+
 }

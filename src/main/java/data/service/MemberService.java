@@ -59,9 +59,22 @@ public class MemberService {
         return memInter.isLoginCheck(userId, passwd)==1?true:false;
     }
 
+
+    public MemberDto getProfPhoto(String port_Id){
+        return memInter.getProfPhoto(port_Id);
+    }
+
+    public String getProf(int num){
+        return memInter.getProf(num);
+    }
+
+//    public String getUserData(int num) { return memInter.getUserDatauser(num);
+//    }
+
     public List<BoardDto> getBoardByUserId(String userId)
     {
         return borInter.getBoardByUserId(userId);
     }
+
 }
 

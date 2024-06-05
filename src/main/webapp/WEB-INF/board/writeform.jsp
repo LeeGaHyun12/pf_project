@@ -57,7 +57,7 @@
         $(function(){
             $("#upload").change(function(){
                 //console.log($(this)[0]);//type 이 file 인경우 배열타입으로 넘어온다
-                let reg=/(.*?)\/(jpg|jpeg|png|gif)$/;
+                let reg=/(.*?)\/(jpg|jpeg|png|gif|PNG|JPG|JPEG)$/;
                 let f=$(this)[0].files[0];
                 if(!f.type.match(reg)){
                     alert("이미지 파일만 가능합니다");
@@ -105,7 +105,7 @@
 
         <div class="form-control">
             <label for="upload">파일 업로드</label>
-            <input type="file" id="upload" name="upload" required/>
+            <input type="file" id="upload" name="upload" multiple required/>
         </div>
 
         <div class="form-control">

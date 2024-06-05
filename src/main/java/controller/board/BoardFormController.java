@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -46,7 +48,8 @@ public class BoardFormController {
         //업로드한 파일의 확장자 분리
         String ext = upload.getOriginalFilename().split("\\.")[1];
         //업로드할 파일명
-        String photoname = UUID.randomUUID() + ext;
+        String photoname = UUID.randomUUID() + "."+ext;
+
 
 
         try {
@@ -55,6 +58,7 @@ public class BoardFormController {
                 e.printStackTrace();
             }
 
+
         BoardDto dto = BoardDto.builder()
                 .subject(subject)
                 .port_photo(photoname)
@@ -62,16 +66,14 @@ public class BoardFormController {
                 .category(category)
                 .build();
 
+
+
         //실제 업로드
 
         //세션으로부터 아이디 얻기
         String loginid=(String) session.getAttribute("loginid");
         dto.setUserId(loginid);
-
-
-        //member db로부터 아이디에 해당하는 이름을 얻어서 dto에 저장
-        String port_Id=memberService.getDataById(loginid).getName()+photoname;
-        dto.setPort_Id(port_Id);
+        dto.setPort_Id(loginid);
 
         //확인할 거... 추가후 저장된 시퀀스 값
         System.out.println("num="+dto.getNum());

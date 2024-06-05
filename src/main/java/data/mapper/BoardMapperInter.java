@@ -34,6 +34,8 @@ public interface BoardMapperInter {
 	@Update("update portfolio set count=count+1 where num=#{num}")
 	public void updateReadcount(@Param("num") int num);
 
+	@Select("select * from user where num")
+	public void getUserData(@Param("num") int num);
 
 	@Select("SELECT * FROM portfolio WHERE userId = #{userId}")
 	List<BoardDto> getBoardByUserId(String userId);

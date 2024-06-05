@@ -49,6 +49,8 @@ public class LoginController {
     public String loginform(){return "member/loginform";
     }
 
+
+
     //로그아웃시 호출
     @ResponseBody
     @GetMapping("/member/logout")
