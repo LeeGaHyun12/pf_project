@@ -157,6 +157,8 @@
                     window.location.href = `${root}/board/search?keyword=` + keyword;
                 }
             });
+
+
         });//close function
     </script>
 </head>
@@ -166,22 +168,18 @@
         <div class="title" onclick="location.href='/board/boardlist'">title</div>
     <div class="rightbox">
 
-
         <div class="search"><input type="text" id="searchInput" placeholder=" Search..."></div>
 
         <c:if test="${sessionScope.loginok==null}">
         <div class="login"><button class="btnlogin" onclick="location.href='/member/loginform'">login</button></div>
         <div class="signup"><button class="btnsignup" onclick="location.href='/member/form'">sign up</button></div>
         </c:if>
-
-
         <c:if test="${sessionScope.loginok!=null}">
-
             <b class="nickname">${sessionScope.loginid}님</b>
-        <div class="logout"><button type="button" id="btnlogout" style="margin-left: 20px;" class="btnlogout">logout</button></div>
+            <img src="../profile/${dto.prof_photo}" class="rounded-circle">
+            <div class="logout"><button type="button" id="btnlogout" style="margin-left: 20px;" class="btnlogout">logout</button></div>
 
         </c:if>
-
     </div>
 </div>
 

@@ -29,18 +29,43 @@
         }
 
         .btnwrite {
-            width: 180px;
-            height: 50px;
-            color: #fff;
-            background: #ff5649;
-            font-size: 22px;
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            background-color: #151010;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            padding: 12px 30px;
             border: none;
             border-radius: 30px;
-            transition: 0.3s;
-            display: flex; /* 버튼 안의 내용물을 가로 중앙 정렬하기 위해 추가 */
-            justify-content: center; /* 버튼 안의 내용물을 가로 중앙 정렬하기 위해 추가 */
-            align-items: center; /* 버튼 안의 내용물을 세로 중앙 정렬하기 위해 추가 */
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
+
+        .btnwrite:hover {
+            background-color: #ff87a3;
+        }
+
+        .btnwrite:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /*.btnwrite {*/
+        /*    width: 180px;*/
+        /*    height: 50px;*/
+        /*    color: #fff;*/
+        /*    background: #ff5649;*/
+        /*    font-size: 22px;*/
+        /*    border: none;*/
+        /*    border-radius: 30px;*/
+        /*    transition: 0.3s;*/
+        /*    display: flex; !* 버튼 안의 내용물을 가로 중앙 정렬하기 위해 추가 *!*/
+        /*    justify-content: center; !* 버튼 안의 내용물을 가로 중앙 정렬하기 위해 추가 *!*/
+        /*    align-items: center; !* 버튼 안의 내용물을 세로 중앙 정렬하기 위해 추가 *!*/
+        /*}*/
     </style>
 </head>
 <body>

@@ -2,17 +2,20 @@ package controller.board;
 
 import data.dto.BoardDto;
 import data.service.BoardService;
+import data.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 public class GetDataController {
 
     @Autowired
     private BoardService boardService;
+    @Autowired
+    private MemberService memberService;
 
     @GetMapping("/getData")
     public BoardDto getData(@RequestParam("num") int num) {
@@ -20,9 +23,10 @@ public class GetDataController {
         return boardService.getBoardByNum(num);
     }
 
-    @PostMapping("/likePost")
+    @GetMapping("/likePost")
     public String likePost(@RequestParam("num") int num){
         try {
+            System.out.println(num);
             boardService.increaseLikeCount(num);
             return "{\"success\": true}";
         } catch (Exception e) {
@@ -39,6 +43,18 @@ public class GetDataController {
             return "{\"success\": false}";
         }
     }
+
+//    @ResponseBody
+//    @GetMapping("/getUserData")
+//    public Map<String, String> getUserData(@RequestParam("num") int num){
+//        System.out.println(num);
+//        String user=memberService.getUserData(num);
+//        Map<String, String> map=new HashMap<>();
+//
+//        map.put("userId",user);
+//
+//        return map;
+//    }
 
 
 

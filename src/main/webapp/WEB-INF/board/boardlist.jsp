@@ -130,10 +130,6 @@
       white-space: nowrap;
       -webkit-overflow-scrolling: touch;
       gap: 8px;
-
-      /* 이전 스타일 유지 */
-      overflow-x: auto; /* 가로 스크롤을 허용하여 내용이 넘칠 때 스크롤 생성 */
-      white-space: nowrap; /* 버튼들이 가로로 나열되도록 함 */
     }
 
     .buttonbox::-webkit-scrollbar {
@@ -172,6 +168,18 @@
       text-overflow: ellipsis; /* 넘치는 텍스트 생략 표시 (...) */
     }
 
+    #profile-photo{
+      width: 70px;
+      height: 70px;
+      background-color: #fff;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
     /* 아이콘 버튼 */
     .icon-buttons {
       position: absolute;
@@ -220,7 +228,6 @@
 
       $(document).on('click', '.box', function() {
         var num = $(this).data('num');
-
         $.ajax({
           url: '/getData',
           type: 'GET',
@@ -237,13 +244,8 @@
             console.error(xhr.responseText);
           }
         });
-      });
 
 
-      $('.box').on('click', function() {
-        var num = $(this).data('num');
-
-        // Increase view count
         $.ajax({
           url: '/increaseCount',
           type: 'POST',
@@ -261,19 +263,36 @@
           }
         });
 
-        // 모달에 데이터를 채우고 보여주는 AJAX 요청
         $.ajax({
-          url: '/getData', // 데이터를 가져오는 서버 엔드포인트
-          type: 'GET',
-          data: { num: num}, // 데이터: 포스트 번호
+          url: '/profile',
+          type: 'get',
+          data: { num: num },
+          dataType: "json",
           success: function(data) {
-            console.log('Image URL:', data.port_photo);
-            $('#portfolio-number').text(data.num);
-            $('#portfolio-photo').attr('src','../photo/'+data.port_photo);
-            $('#portfolio-subject').text(data.subject);
-            $('#portfolio-content').text(data.content);
+            $('#profile-photo').attr('src', '../profile/' + data.prof_photo);
+          },
+          error: function(xhr, status, error) {
+            console.error(xhr.responseText);
+          }
+        });
+      });
 
-            $('#myModal').modal('show'); // 모달 표시
+      $('#heartbtn').on("click",function (){
+        // Use the num value stored globally
+        let number = $('#portfolio-number').text();
+
+        $.ajax({
+          url: '/likePost',
+          type: 'get',
+          data: { "num": number },
+          dataType: "json",
+          success: function(data) {
+            if (data.success) {
+              // Update the like count in the UI
+              var $likeCount = $('.box[data-num="' + num + '"]').find('.bi-heart-fill').next('span');
+              var currentCount = parseInt($likeCount.text());
+              $likeCount.text(currentCount + 1);
+            }
           },
           error: function(xhr, status, error) {
             console.error(xhr.responseText);
@@ -287,6 +306,71 @@
         window.location.reload(); // 이전 페이지로 새로 고침
       }
 
+      $('.icon-button:last-child').click(function() {
+        var currentUrl = window.location.href;
+
+        // 공유하기 기능 구현
+        if (navigator.share) {
+          navigator.share({
+            url: currentUrl,
+          })
+                  .then(() => {
+                    console.log('Successfully shared');
+                  })
+                  .catch((error) => {
+                    console.error('Error sharing:', error);
+                  });
+        } else {
+          // 웹 공유 API를 지원하지 않는 경우 클립보드 복사 기능 구현
+          navigator.clipboard.writeText(currentUrl)
+                  .then(() => {
+                    alert('링크가 클립보드에 복사되었습니다.');
+                  })
+                  .catch((error) => {
+                    console.error('Error copying to clipboard:', error);
+                  });
+        }
+      });
+
+      $('.icon-button:last-child').click(function() {
+        var currentUrl = window.location.href;
+        $('#shareUrl').val(currentUrl);
+        $('#shareModal').modal('show');
+      });
+
+// 링크 복사 기능
+      function copyShareUrl() {
+        var shareUrl = $('#shareUrl').val();
+        navigator.clipboard.writeText(shareUrl)
+                .then(() => {
+                  alert('Link copied to clipboard!');
+                })
+                .catch((error) => {
+                  console.error('Error copying to clipboard:', error);
+                });
+      }
+
+      // 프로필 사진 아이콘 클릭 이벤트 핸들러
+      $('.icon-button:first-child').click(function() {
+        var num = $('.box[data-num]').data('num');
+
+        $.ajax({
+          url: '/getUserData',
+          type: 'GET',
+          data: { num: num },
+          success: function(data) {
+            $('#userName').text(data.name);
+            $('#userPhoto').attr('src', '../profile/' + data.prof_photo);
+            $('#userEmail').text(data.email);
+            $('#userCategory').text(data.category);
+
+            $('#userModal').modal('show');
+          },
+          error: function(xhr, status, error) {
+            console.error(xhr.responseText);
+          }
+        });
+      });
       // 모달 닫힘 이벤트 리스너 등록
       $('#myModal').on('hidden.bs.modal', function () {
         closeModalAndReload(); // 모달이 닫히면 이전 페이지로 이동
@@ -307,27 +391,27 @@
 <body>
 
 <b class="text">Explore inspiring designs</b><br>
+
 <div class="buttonbox">
-  <button class="ctbutton" value="graphic_design"># 그래픽 디자인</button>
-  <button class="ctbutton" value="video_motion_graphics"># 영상/모션그래픽</button>
-  <button class="ctbutton" value="character_design"># 캐릭터 디자인</button>
-  <button class="ctbutton" value="digital_art"># 디지털 아트</button>
-  <button class="ctbutton" value="illustration"># 일러스트레이션</button>
-  <button class="ctbutton" value="fine_art"># 파인아트</button>
-  <button class="ctbutton" value="branding_editing"># 브랜딩/편집</button>
+  <button class="ctbutton" value="graphic_design"># Graphic Design</button>
+  <button class="ctbutton" value="video_motion_graphics"># Video/Motion Graphics</button>
+  <button class="ctbutton" value="character_design"># Character Design</button>
+  <button class="ctbutton" value="digital_art"># Digital Art</button>
+  <button class="ctbutton" value="illustration"># Illustration</button>
+  <button class="ctbutton" value="fine_art"># Fine Art</button>
+  <button class="ctbutton" value="branding_editing"># Branding/Editing</button>
   <button class="ctbutton" value="ui_ux"># UI/UX</button>
-  <button class="ctbutton" value="product_package_design"># 제품/패키지 디자인</button>
-  <button class="ctbutton" value="typography"># 타이포그래피</button>
-  <button class="ctbutton" value="photography"># 포토그래피</button>
-  <button class="ctbutton" value="craft"># 공예</button>
+  <button class="ctbutton" value="product_package_design"># Product/Package Design</button>
+  <button class="ctbutton" value="typography"># Typography</button>
+  <button class="ctbutton" value="photography"># Photography</button>
+  <button class="ctbutton" value="craft"># Craft</button>
 </div>
+
 
 <div class="container">
   <c:forEach var="dto" items="${boardList}">
     <div class="box" data-num="${dto.num}" data-category="${dto.category}">
-
       <div class="box_background"><img src="../photo/${dto.port_photo}"></div>
-
 
       <div class="content">
         <p class="userId" style="margin: 0;">${dto.userId}</p>
@@ -356,10 +440,12 @@
       <div class="modal-body" id="portfolio-details">
         <img id="portfolio-photo" src="" alt="Portfolio Photo">
         <div class="icon-buttons">
-          <div class="icon-button"></div>
-          <div class="icon-button" style="background-color: #f75172"><i class="bi bi-heart-fill" style="color: white"></i></div>
+
+          <div class="icon-button" onclick="location.href=''"><img id="profile-photo" src="" alt="Profile Photo" onerror="this.src='../image/K-045.png'"></div>
+          <div class="icon-button" style="background-color: #f75172"><i id=heartbtn class="bi bi-heart-fill" style="color: white"></i></div>
           <div class="icon-button" style="background-color: #1bcad3"><i class="bi bi-chat-dots-fill" style="color: white"></i></div>
           <div class="icon-button"><i class="bi bi-share-fill"></i></div>
+
         </div>
 
       </div>
@@ -371,5 +457,43 @@
   </div>
 </div>
 
+<!-- 공유하기 모달 -->
+<div id="shareModal" class="modal fade" role="dialog" >
+  <div class="modal-dialog" style="max-width: 400px;
+      margin: 1.75rem auto;">
+    <div class="modal-content" style="border-radius: 20px;">
+      <div class="modal-header">
+        <h4 class="modal-title">Share this portfoilo</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <input type="text" class="form-control" id="shareUrl" readonly>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" onclick="copyShareUrl()">Copy Link</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 유저 정보 모달 -->
+<div id="userModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="userName"></h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <img id="userPhoto" src="" alt="User Photo" style="width: 150px; height: 150px; border-radius: 50%;">
+        <p><strong>Email:</strong> <span id="userEmail"></span></p>
+        <p><strong>Category:</strong> <span id="userCategory"></span></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>
