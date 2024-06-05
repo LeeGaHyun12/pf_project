@@ -16,24 +16,32 @@
             font-family: "Archivo", sans-serif;
 
         }
-        .container {
-            height: 100vh; /* 화면 전체를 사용할 수 있도록 높이 설정 */
-            border: 1px solid black;
-        }
+
         .write{
-            border: 1px solid black;
+            margin-top: 150px;
+            height: 600px;
+            width: 2200px;
+
+
         }
         b{
-            font-size: 90px;
+            font-size: 110px;
             color: white;
         }
 
+        .writebox{
+            margin-top: 50px;
+            display: flex; /* 버튼 안의 내용물을 가로 중앙 정렬하기 위해 추가 */
+            justify-content: center; /* 버튼 안의 내용물을 가로 중앙 정렬하기 위해 추가 */
+            align-items: center; /* 버튼 안의 내용물을 세로 중앙 정렬하기 위해 추가 */
+        }
+
         .btnwrite {
-            width: 180px;
-            height: 50px;
+            height: 60px;
+            width: 220px;
             color: #fff;
             background: #ff5649;
-            font-size: 22px;
+            font-size: 28px;
             border: none;
             border-radius: 30px;
             transition: 0.3s;
@@ -45,7 +53,11 @@
 </head>
 <body>
 <div class="container">
-    <div class="write"><b>Create your</b> <br><b>portfolio and designs</b><button class="btnwrite" onclick="location.href='/board/writeform'">write</button></div>
+    <div class="write"><b class="Create you">Create your</b><br><b>portfolio and designs</b>
+        <div class="writebox">
+        <button class="btnwrite" onclick="location.href='/board/writeform'">Get started</button>
+    </div>
+    </div>
 </div>
 </body>
 </html>

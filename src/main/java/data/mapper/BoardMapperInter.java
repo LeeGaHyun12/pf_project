@@ -35,4 +35,11 @@ public interface BoardMapperInter {
 	public void updateReadcount(@Param("num") int num);
 
 
+	@Select("SELECT * FROM portfolio WHERE userId = #{userId}")
+	List<BoardDto> getBoardByUserId(String userId);
+
+
+
+
+
 }
