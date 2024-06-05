@@ -141,7 +141,7 @@
     /*카테고리 버튼*/
     .ctbutton {
       flex: 1 1 auto; /* 버튼이 가로로 균등하게 늘어나도록 설정 */
-      max-width: 300px; /* 버튼의 최대 너비 설정 */
+      max-width: 350px; /* 버튼의 최대 너비 설정 */
       min-width: 180px; /* 버튼의 최소 너비 설정 */
       color: white;
       background: #feb6d3;
@@ -263,6 +263,7 @@
         });
       });
 
+
       $('#heartbtn').on("click",function (){
         // Use the num value stored globally
         let number = $('#portfolio-number').val();
@@ -366,12 +367,12 @@
         dots: true,
         infinite: true,
         speed: 1200,
-        slidesToShow: 3,  // 한 화면에 보여줄 슬라이드 개수
-        slidesToScroll: 1, // 한 번에 넘어가는 슬라이드 개수
-        centerMode: true,
-        variableWidth: true,
+        slidesToShow: 5,  // 한 화면에 보여줄 슬라이드 개수
+        slidesToScroll: 3, // 한 번에 넘어가는 슬라이드 개수
+        variableWidth: true
       });
     });
+
 
 
   </script>

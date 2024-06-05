@@ -129,7 +129,7 @@
 
     .nickname{
         color: black;
-        font-size: 23px;
+        font-size: 25px;
         margin-left: 10px;
         display: flex; /* 버튼 안의 내용물을 가로 중앙 정렬하기 위해 추가 */
         justify-content: center; /* 버튼 안의 내용물을 가로 중앙 정렬하기 위해 추가 */
