@@ -10,7 +10,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dragscroll/0.0.8/dragscroll.min.js" ></script>
   <!--폰트-->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,9 +18,7 @@
 
   <style>
     body *{
-      font-family: "Archivo", sans-serif;
-
-
+      font-family: "Nanum Myeongjo", serif
     }
 
     .container {
@@ -126,46 +124,33 @@
     .buttonbox {
       display: flex;
       overflow-x: auto;
-      scroll-behavior: smooth;
-      white-space: nowrap;
-      -webkit-overflow-scrolling: touch;
-      gap: 8px;
+      margin-top: 20px;
     }
 
     .buttonbox::-webkit-scrollbar {
-      display: none; /* Hide scrollbar for WebKit browsers */
+        display: none;
     }
 
     .text{
-      font-size: 70px;
+      font-size: 80px;
       color: black;
       overflow-x: auto;
-      scroll-behavior: smooth;
-      white-space: nowrap;
-      -webkit-overflow-scrolling: touch;
       gap: 8px;
     }
 
     /*카테고리 버튼*/
     .ctbutton {
       flex: 1 1 auto; /* 버튼이 가로로 균등하게 늘어나도록 설정 */
-      max-width: 250px; /* 버튼의 최대 너비 설정 */
-      min-width: 60px; /* 버튼의 최소 너비 설정 */
-      height: 50px;
+      max-width: 300px; /* 버튼의 최대 너비 설정 */
+      min-width: 180px; /* 버튼의 최소 너비 설정 */
       color: white;
-      background: #feb6c8;
-      font-size: 22px;
+      background: #feb6d3;
+      font-size: 28px;
       border: none;
       border-radius: 15px;
       transition: 0.3s;
       display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 8px;
 
-      white-space: nowrap; /* 텍스트 줄바꿈 방지 */
-      overflow: hidden; /* 넘치는 텍스트 숨기기 */
-      text-overflow: ellipsis; /* 넘치는 텍스트 생략 표시 (...) */
     }
 
     #profile-photo{
@@ -237,6 +222,7 @@
             $('#portfolio-photo').attr('src', '../photo/' + data.port_photo);
             $('#portfolio-subject').text(data.subject);
             $('#portfolio-content').text(data.content);
+            $('#portfolio-category').text(data.category);
 
             $('#myModal').modal('show');
           },
@@ -276,6 +262,13 @@
           }
         });
       });
+
+            console.log('Image URL:', data.port_photo);
+            $('#portfolio-number').text(data.num);
+            $('#portfolio-photo').attr('src','../photo/'+data.port_photo);
+            $('#portfolio-subject').text(data.subject);
+            $('#portfolio-content').text(data.content);
+            $('#portfolio-category').text(data.category);
 
       $('#heartbtn').on("click",function (){
         // Use the num value stored globally
@@ -375,17 +368,22 @@
       $('#myModal').on('hidden.bs.modal', function () {
         closeModalAndReload(); // 모달이 닫히면 이전 페이지로 이동
       });
+    });
 
 
-      // Scroll buttons
-      $('#scroll-left').on('click', function() {
-        $('.buttonbox').scrollLeft($('.buttonbox').scrollLeft() - 100);
-      });
-
-      $('#scroll-right').on('click', function() {
-        $('.buttonbox').scrollLeft($('.buttonbox').scrollLeft() + 100);
+    $(document).ready(function() {
+      $('.buttonbox').slick({
+        dots: true,
+        infinite: true,
+        speed: 1200,
+        slidesToShow: 3,  // 한 화면에 보여줄 슬라이드 개수
+        slidesToScroll: 1, // 한 번에 넘어가는 슬라이드 개수
+        centerMode: true,
+        variableWidth: true,
       });
     });
+
+
   </script>
 </head>
 <body>
@@ -450,8 +448,8 @@
 
       </div>
       <div class="modal-footer">
-        <a><strong>Portfolio Number:</strong> <span id="portfolio-number"></span></a>
         <p><strong>Content:</strong> <span id="portfolio-content"></span></p>
+        <p><strong>Category:</strong> <span id="portfolio-category"></span></p>
       </div>
     </div>
   </div>

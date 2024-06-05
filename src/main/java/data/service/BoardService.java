@@ -46,6 +46,11 @@ public class BoardService {
         svInter.updateReadcount(num);
     }
 
+    // 추가: userId를 사용하여 BoardDto 리스트를 가져오는 메서드
+    public List<BoardDto> getBoardByUserId(String userId) {
+        return svInter.getBoardByUserId(userId);
+    }
+
 
 
 }

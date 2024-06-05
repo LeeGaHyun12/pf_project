@@ -1,6 +1,8 @@
 package data.service;
 
+import data.dto.BoardDto;
 import data.dto.MemberDto;
+import data.mapper.BoardMapperInter;
 import data.mapper.MemberMapperInter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,10 @@ import java.util.Map;
 public class MemberService {
     @Autowired
     private MemberMapperInter memInter;
+
+    @Autowired
+    private BoardMapperInter borInter;
+
     public int getTotalCount(){
         return memInter.getTotalCount();
     }
@@ -53,6 +59,7 @@ public class MemberService {
         return memInter.isLoginCheck(userId, passwd)==1?true:false;
     }
 
+
     public MemberDto getProfPhoto(String port_Id){
         return memInter.getProfPhoto(port_Id);
     }
@@ -63,5 +70,11 @@ public class MemberService {
 
 //    public String getUserData(int num) { return memInter.getUserDatauser(num);
 //    }
+
+    public List<BoardDto> getBoardByUserId(String userId)
+    {
+        return borInter.getBoardByUserId(userId);
+    }
+
 }
 

@@ -20,6 +20,7 @@
     <definition name="member/loginform" template="/WEB-INF/member/login.jsp"/>
     <definition name="member/logout" template="/WEB-INF/layout/main.jsp"/>
    <definition name="board/writeform" template="/WEB-INF/board/writeform.jsp"/>
+    <definition name="board/mypageform" template="/WEB-INF/board/mypageform.jsp"/>
 
     <definition name="board/boardlist" extends="mainLayout">
         <put-attribute name="main" value="/WEB-INF/board/boardlist.jsp"/>

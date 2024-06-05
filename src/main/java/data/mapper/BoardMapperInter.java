@@ -37,4 +37,11 @@ public interface BoardMapperInter {
 	@Select("select * from user where num")
 	public void getUserData(@Param("num") int num);
 
+	@Select("SELECT * FROM portfolio WHERE userId = #{userId}")
+	List<BoardDto> getBoardByUserId(String userId);
+
+
+
+
+
 }
