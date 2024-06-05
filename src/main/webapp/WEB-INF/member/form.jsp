@@ -19,20 +19,20 @@
     <style>
 
         @font-face {
-            font-family : 'YangjuByeolsanA1';
-            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2405@1.0/YangjuByeolsanA1.woff2') format('woff2');
+            font-family: 'YEONGJUPunggiGinsengTTF';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2310@1.0/YEONGJUPunggiGinsengTTF.woff2') format('woff2');
             font-weight: normal;
             font-style: normal;
         }
         body *{
-            font-family : 'YangjuByeolsanA1';
-            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2405@1.0/YangjuByeolsanA1.woff2') format('woff2');
+            font-family: 'YEONGJUPunggiGinsengTTF';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2310@1.0/YEONGJUPunggiGinsengTTF.woff2') format('woff2');
             font-weight: normal;
             font-style: normal;
         }
         body,input {
-            font-family : 'YangjuByeolsanA1';
-            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2405@1.0/YangjuByeolsanA1.woff2') format('woff2');
+            font-family: 'YEONGJUPunggiGinsengTTF';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2310@1.0/YEONGJUPunggiGinsengTTF.woff2') format('woff2');
             font-weight: normal;
             font-style: normal;
         }
@@ -129,7 +129,7 @@
         }
     </script>
 </head>
-<body style="background-color: black">
+<body style="background-image: url('/image/ backgroundimg.jpg'); background-size: cover; background-position: center;">
 
 <div class="container">
     <h3 class="text-center mb-4">회원 가입</h3>

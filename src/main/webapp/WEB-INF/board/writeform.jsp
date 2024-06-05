@@ -3,25 +3,38 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>Insert title here</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- jQuery 추가 -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- 부트스트랩 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
-    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+
+    <title>회원 가입</title>
+    <!-- 부트스트랩 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 사용자 정의 CSS -->
     <style>
-        body *{
-            font-family: 'Jua';
+
+        @font-face {
+            font-family: 'YEONGJUPunggiGinsengTTF';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2310@1.0/YEONGJUPunggiGinsengTTF.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
         }
-
-        body {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-
+        body *{
+            font-family: 'YEONGJUPunggiGinsengTTF';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2310@1.0/YEONGJUPunggiGinsengTTF.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+        body,input {
+            font-family: 'YEONGJUPunggiGinsengTTF';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2310@1.0/YEONGJUPunggiGinsengTTF.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
         }
         input[type="submit"],input[type="file"],input[type="text"],
         textarea {
