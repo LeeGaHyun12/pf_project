@@ -24,10 +24,11 @@ public class GetDataController {
     }
 
     @GetMapping("/likePost")
-    public String likePost(@RequestParam("num") int num){
+    public String likePost(@RequestParam("num") String num){
+        System.out.println("num");
+        System.out.println(num);
         try {
-            System.out.println(num);
-            boardService.increaseLikeCount(num);
+            boardService.increaseLikeCount(Integer.parseInt(num));
             return "{\"success\": true}";
         } catch (Exception e) {
             return "{\"success\": false}";
