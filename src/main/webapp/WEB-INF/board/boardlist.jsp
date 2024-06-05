@@ -218,7 +218,7 @@
           type: 'GET',
           data: { num: num },
           success: function(data) {
-            $('#portfolio-number').text(data.num);
+            $('#portfolio-number').val(data.num);
             $('#portfolio-photo').attr('src', '../photo/' + data.port_photo);
             $('#portfolio-subject').text(data.subject);
             $('#portfolio-content').text(data.content);
@@ -266,15 +266,15 @@
 
       $('#heartbtn').on("click",function (){
         // Use the num value stored globally
-        let number = $('#portfolio-number').text();
-
+        let number = $('#portfolio-number').val();
         $.ajax({
           url: '/likePost',
           type: 'get',
-          data: { "num": number },
+          data: { num: number },
           dataType: "json",
           success: function(data) {
-            if (data.success) {
+
+            if (data.success===true) {
               // Update the like count in the UI
               var $likeCount = $('.box[data-num="' + num + '"]').find('.bi-heart-fill').next('span');
               var currentCount = parseInt($likeCount.text());
@@ -287,14 +287,12 @@
         });
       });
 
-      // 모달이 닫힐 때 이전 페이지로 이동하는 함수
-      function closeModalAndReload() {
-        $('#myModal').modal('hide'); // 모달을 닫음
-        window.location.reload(); // 이전 페이지로 새로 고침
-      }
+
 
       $('.icon-button:last-child').click(function() {
         var currentUrl = window.location.href;
+        $('#shareUrl').val(currentUrl);
+        $('#shareModal').modal('show');
 
         // 공유하기 기능 구현
         if (navigator.share) {
@@ -311,7 +309,6 @@
           // 웹 공유 API를 지원하지 않는 경우 클립보드 복사 기능 구현
           navigator.clipboard.writeText(currentUrl)
                   .then(() => {
-                    alert('링크가 클립보드에 복사되었습니다.');
                   })
                   .catch((error) => {
                     console.error('Error copying to clipboard:', error);
@@ -319,13 +316,6 @@
         }
       });
 
-      $('.icon-button:last-child').click(function() {
-        var currentUrl = window.location.href;
-        $('#shareUrl').val(currentUrl);
-        $('#shareModal').modal('show');
-      });
-
-// 링크 복사 기능
       function copyShareUrl() {
         var shareUrl = $('#shareUrl').val();
         navigator.clipboard.writeText(shareUrl)
@@ -334,7 +324,7 @@
                 })
                 .catch((error) => {
                   console.error('Error copying to clipboard:', error);
-                });
+                })
       }
 
       // 프로필 사진 아이콘 클릭 이벤트 핸들러
@@ -358,6 +348,13 @@
           }
         });
       });
+
+      // 모달이 닫힐 때 이전 페이지로 이동하는 함수
+      function closeModalAndReload() {
+        $('#myModal').modal('hide'); // 모달을 닫음
+        window.location.reload(); // 이전 페이지로 새로 고침
+      }
+
       // 모달 닫힘 이벤트 리스너 등록
       $('#myModal').on('hidden.bs.modal', function () {
         closeModalAndReload(); // 모달이 닫히면 이전 페이지로 이동
@@ -426,6 +423,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
+        <input hidden="hidden" value="" id="portfolio-number">
         <h4 class="modal-title"><span id="portfolio-subject"></span></h4>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
