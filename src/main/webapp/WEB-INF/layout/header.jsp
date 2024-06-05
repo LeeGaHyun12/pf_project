@@ -12,7 +12,7 @@
 <style>
 
     body{
-
+        font-family: "Nanum Myeongjo", serif
 
     }
     div.header{
@@ -33,9 +33,9 @@
         height: 100px;
         justify-content: center;
         position: absolute; /* 절대 위치 지정 */
-        left: 50%; /* 가로 중앙에 맞춤 */
-        transform: translateX(-50%); /* 요소 너비의 절반만큼 왼쪽으로 이동 */
+        left: 25px;
         font-size: 70px;
+        cursor: pointer;
     }
     div.search{
         color: white;
@@ -79,7 +79,7 @@
         display: flex; /* 버튼 안의 내용물을 가로 중앙 정렬하기 위해 추가 */
         justify-content: center; /* 버튼 안의 내용물을 가로 중앙 정렬하기 위해 추가 */
         align-items: center; /* 버튼 안의 내용물을 세로 중앙 정렬하기 위해 추가 */
-
+        cursor: pointer;
     }
     div.logout{
         color: white;
@@ -101,6 +101,7 @@
         display: flex; /* 버튼 안의 내용물을 가로 중앙 정렬하기 위해 추가 */
         justify-content: center; /* 버튼 안의 내용물을 가로 중앙 정렬하기 위해 추가 */
         align-items: center; /* 버튼 안의 내용물을 세로 중앙 정렬하기 위해 추가 */
+        cursor: pointer;
     }
     div.signup{
         color: white;
@@ -123,7 +124,7 @@
         display: flex; /* 버튼 안의 내용물을 가로 중앙 정렬하기 위해 추가 */
         justify-content: center; /* 버튼 안의 내용물을 가로 중앙 정렬하기 위해 추가 */
         align-items: center; /* 버튼 안의 내용물을 세로 중앙 정렬하기 위해 추가 */
-
+        cursor: pointer;
     }
 
     .nickname{
@@ -133,6 +134,7 @@
         display: flex; /* 버튼 안의 내용물을 가로 중앙 정렬하기 위해 추가 */
         justify-content: center; /* 버튼 안의 내용물을 가로 중앙 정렬하기 위해 추가 */
         align-items: center; /* 버튼 안의 내용물을 세로 중앙 정렬하기 위해 추가 */
+        cursor: pointer;
     }
 </style>
     <c:set var="root" value="<%=request.getContextPath()%>"/>
@@ -157,17 +159,32 @@
                     window.location.href = `${root}/board/search?keyword=` + keyword;
                 }
             });
+            //마이페이지로 이동하는 버튼 (test)
+            $(".nickname").click(function() {
+                let loginId = "${sessionScope.loginid}";
+                if (loginId) {
+                    window.location.href = `${root}/board/mypageform?userid=` + loginId;
+                } else {
+                    alert("로그인이 필요합니다.");
+                }
+            });
+
         });//close function
+
+
     </script>
 </head>
 <body>
 <!--test-->
 <div class="header">
-        <div class="title" onclick="location.href='/board/boardlist'">title</div>
+        <div class="title" onclick="location.href='/board/boardlist'">Allio</div>
     <div class="rightbox">
 
 
-        <div class="search"><input type="text" id="searchInput" placeholder=" Search..."></div>
+        <div class="search">
+            <div class="input-group">
+            <input type="text" id="searchInput" class="form-control" placeholder="Search..."></div>
+        </div>
 
         <c:if test="${sessionScope.loginok==null}">
         <div class="login"><button class="btnlogin" onclick="location.href='/member/loginform'">login</button></div>

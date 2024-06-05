@@ -16,11 +16,13 @@
             $('.center').slick({
                 dots: true,
                 infinite: true,
-                speed: 300,
+                speed: 1200,
                 slidesToShow: 3,  // 한 화면에 보여줄 슬라이드 개수
                 slidesToScroll: 1, // 한 번에 넘어가는 슬라이드 개수
                 centerMode: true,
-                variableWidth: true
+                variableWidth: true,
+                autoplay: true,
+                autoplaySpeed: 2000
             });
         });
     </script>
@@ -39,7 +41,6 @@
         }
 
         .banner {
-            background-color: black;
             color: white;
             width: 600px;
             height: 290px;
@@ -48,6 +49,9 @@
             justify-content: center;
             border-radius: 20px;
             position: relative;
+            background-size: cover; /* 이미지를 비율에 맞게 늘리거나 축소합니다. */
+            background-position: center; /* 이미지를 수평 및 수직으로 가운데로 정렬합니다. */
+
         }
 
         .slick-slide {
@@ -58,24 +62,18 @@
             margin: 0 -10px; /* 양쪽 끝 간격 조정 */
         }
 
-        img {
-            position: absolute; /* Add this */
-            width: 100%; /* Add this */
-            height: 100%; /* Add this */
-            object-fit: cover; /* Add this */
-            border-radius: 20px; /* Optional: match border-radius of .banner */
-        }
+
 
     </style>
 </head>
 
 <body>
 <div class="center">
-    <div class="banner"><img src="./image/photo.jpg"> </div>
-    <div class="banner">2</div>
-    <div class="banner">3</div>
-    <div class="banner">4</div>
-    <div class="banner">5</div>
+    <div class="banner" id="banner1" s>1</div>
+    <div class="banner" id="banner2" style="background-image: url(/image/banner1.png)"></div>
+    <div class="banner" id="banner3">3</div>
+    <div class="banner" id="banner4">4</div>
+    <div class="banner" id="banner5"></div>
 </div>
 
 </body>
