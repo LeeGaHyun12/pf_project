@@ -21,13 +21,15 @@
             margin-top: 150px;
             height: 600px;
             width: 2200px;
-
-
         }
-        b{
+
+
+        .write> b{
             font-size: 110px;
             color: white;
         }
+
+
 
         .writebox{
             margin-top: 50px;
@@ -47,10 +49,15 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex; /* 버튼 안의 내용물을 가로 중앙 정렬하기 위해 추가 */
+            justify-content: center; /* 버튼 안의 내용물을 가로 중앙 정렬하기 위해 추가 */
+            align-items: center; /* 버튼 안의 내용물을 세로 중앙 정렬하기 위해 추가 */
         }
 
         .btnwrite:hover {
-            background-color: #ff87a3;
+            background-color: black; /* 여기에 버튼의 배경색 반전값을 지정하세요 */
+            mix-blend-mode: difference; /* 블렌드 모드를 사용하여 반전 효과를 적용합니다. */
+
         }
 
         .btnwrite:active {
@@ -58,19 +65,7 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        /*.btnwrite {*/
-        /*    width: 180px;*/
-        /*    height: 50px;*/
-        /*    color: #fff;*/
-        /*    background: #ff5649;*/
-        /*    font-size: 22px;*/
-        /*    border: none;*/
-        /*    border-radius: 30px;*/
-        /*    transition: 0.3s;*/
-        /*    display: flex; !* 버튼 안의 내용물을 가로 중앙 정렬하기 위해 추가 *!*/
-        /*    justify-content: center; !* 버튼 안의 내용물을 가로 중앙 정렬하기 위해 추가 *!*/
-        /*    align-items: center; !* 버튼 안의 내용물을 세로 중앙 정렬하기 위해 추가 *!*/
-        /*}*/
+
     </style>
 </head>
 <body>
