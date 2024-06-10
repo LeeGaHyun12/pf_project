@@ -153,6 +153,13 @@
 
     }
 
+    .ctbutton:hover {
+      background-color: black; /* 여기에 버튼의 배경색 반전값을 지정하세요 */
+
+
+    }
+
+
     #profile-photo{
       width: 70px;
       height: 70px;
@@ -431,7 +438,7 @@
         <img id="portfolio-photo" src="" alt="Portfolio Photo">
         <div class="icon-buttons">
 
-          <div class="icon-button" onclick="location.href=''"><img id="profile-photo" src="" alt="Profile Photo" onerror="this.src='../image/K-045.png'"></div>
+          <div class="icon-button" onclick="location.href='/board/mypageform?userId=sup3537'"><img id="profile-photo" src="" alt="Profile Photo" onerror="this.src='../image/K-045.png'"></div>
           <div class="icon-button" style="background-color: #f75172"><i id=heartbtn class="bi bi-heart-fill" style="color: white"></i></div>
           <div class="icon-button" style="background-color: #1bcad3"><i class="bi bi-chat-dots-fill" style="color: white"></i></div>
           <div class="icon-button"><i class="bi bi-share-fill"></i></div>

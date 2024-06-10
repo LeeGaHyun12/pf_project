@@ -37,6 +37,19 @@
             font-style: normal;
         }
 
+        div.title{
+            font-family: "Nanum Myeongjo", serif;
+            color: black;
+            width: 100px;
+            height: 100px;
+            justify-content: center;
+            left: 50%;
+            font-size: 70px;
+            cursor: pointer;
+            margin-left: 160px;
+        }
+
+
         .container {
             max-width: 500px;
             margin: 50px auto;
@@ -132,6 +145,7 @@
 <body style="background-image: url('/image/ backgroundimg.jpg'); background-size: cover; background-position: center;">
 
 <div class="container">
+    <div class="title" onclick="location.href='/board/boardlist'">Allio</div>
     <h3 class="text-center mb-4">회원 가입</h3>
     <form action="./insert" method="post" enctype="multipart/form-data" onsubmit="return check()">
         <div class="form-group">
