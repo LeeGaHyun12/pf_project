@@ -45,6 +45,19 @@
             border: 0.2px solid black;
         }
 
+        div.title{
+            font-family: "Nanum Myeongjo", serif;
+            color: black;
+            width: 100px;
+            height: 100px;
+            justify-content: center;
+            left: 50%;
+            font-size: 70px;
+            cursor: pointer;
+            margin-left: 30px;
+        }
+
+
         button{
             border-radius: 10px;
             border: 0.2px solid white;
@@ -107,8 +120,9 @@
 
 <body>
 <form action="./upload" method="post" enctype="multipart/form-data">
-
+    <div class="title" onclick="location.href='/board/boardlist'">Allio</div>
     <fieldset>
+
         <legend>게시물 작성</legend>
 
         <div class="form-control">

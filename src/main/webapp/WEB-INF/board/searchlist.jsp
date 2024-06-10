@@ -1,25 +1,39 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>검색 결과</title>
+    <title>Insert title here</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dragscroll/0.0.8/dragscroll.min.js" ></script>
+    <!--폰트-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Domine:wght@400..700&display=swap" rel="stylesheet">
     <style>
+        body *{
+            font-family: "Nanum Myeongjo", serif
+        }
+
         .container {
+            max-width: 1600px; /* 최대 너비 설정 */
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-around;
-            padding: 1px;
-            border: 1px solid rebeccapurple;
+            justify-content: flex-end; /* 오른쪽부터 정렬 */
+            padding: 10px;
+            flex-direction: row-reverse; /* 오른쪽부터 정렬 */
         }
 
         .box {
             position: relative;
-            border: 1px solid black;
             color: white;
-            width: 22%;
+            flex: 1 1 calc(25% - 2%); /* 4개씩 배치되도록 설정 (25% - 2%는 margin 포함한 크기) */
+            max-width: calc(25% - 2%);
             height: 300px;
             margin: 1%;
             border-radius: 16px;
@@ -32,8 +46,13 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-size: cover;
-            filter: brightness(70%);
+            overflow: hidden;
+        }
+        .box_background img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* 이미지를 부모 요소의 크기에 맞게 조정 */
+            right: 0px;
         }
 
         .content {
@@ -41,7 +60,7 @@
             bottom: 0;
             right: 0;
             left: 0;
-            height: 20%;
+            height: 15%;
             padding: 1rem;
             background: linear-gradient(to bottom left, #EF8D9C 40%, #FFC39E 100%);
             width: 100%;
@@ -64,16 +83,16 @@
             align-items: center;
             font-size: 20px;
         }
-        /* 이미지 박스*/
-        #portfolio-details {
+        .modal-body {
             display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;
+            justify-content: center; /* 수평 가운데 정렬 */
+            align-items: center; /* 수직 가운데 정렬 */
+            position: relative; /* 내부 요소들의 위치를 조정하기 위해 relative */
 
         }
-        /* 이미지 */
+
         #portfolio-photo {
+            position: relative;
             width: 70%;
             height: auto;
             object-fit: cover;
@@ -81,42 +100,103 @@
             margin-top: 60px;
         }
 
+
         .modal-title {
-            font-size: 20px;
+            font-size: 28px;
         }
 
         .modal-dialog {
             max-width: 100%;
-            height: auto;
         }
-        .modal-content {
-            height: 100%;
-        }
+
 
         .btn-close {
             font-size: 20px; /* x버튼 사이즈 */
         }
 
-        .modal-body {
-            height: 80vh; /* 화면 높이의 80%로 설정 */
-        }
-
         .modal-footer {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
             background-color: #f8f9fa;
             border-top: 1px solid #dee2e6;
             font-size: 20px;
-            padding: 20px;
         }
-        .modal-footer a,
-        .modal-footer p {
-            margin: 0;
-            width: 100%;
-            font-size: 16px;
-            line-height: 1.5; /* 줄 간격 조정 */
+
+        .buttonbox {
+            display: flex;
+            overflow-x: auto;
+            margin-top: 20px;
         }
+
+        .buttonbox::-webkit-scrollbar {
+            display: none;
+        }
+
+        .text{
+            font-size: 80px;
+            color: black;
+            overflow-x: auto;
+            gap: 8px;
+        }
+
+        /*카테고리 버튼*/
+        .ctbutton {
+            flex: 1 1 auto; /* 버튼이 가로로 균등하게 늘어나도록 설정 */
+            max-width: 350px; /* 버튼의 최대 너비 설정 */
+            min-width: 180px; /* 버튼의 최소 너비 설정 */
+            color: white;
+            background: #feb6d3;
+            font-size: 28px;
+            border: none;
+            border-radius: 15px;
+            transition: 0.3s;
+            display: flex;
+
+        }
+
+        #profile-photo{
+            width: 70px;
+            height: 70px;
+            background-color: #fff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        /* 아이콘 버튼 */
+        .icon-buttons {
+            position: absolute;
+            right: 15px;
+            top: 15px;
+            display: flex;
+            flex-direction: column; /* 세로 방향으로 버튼 정렬 */
+            gap: 15px; /* 버튼 간의 간격 */
+        }
+
+        .icon-button {
+            width: 70px;
+            height: 70px;
+            background-color: #fff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .icon-button:hover {
+            background-color: #f0f0f0;
+        }
+
+        .icon-button i {
+            font-size: 27px;
+            color: #333;
+            padding: 0 20px;
+        }
+
     </style>
 </head>
 <script type="text/javascript">

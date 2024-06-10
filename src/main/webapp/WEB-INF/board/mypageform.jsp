@@ -242,7 +242,7 @@
                 <div class="portfolio_photo">
                     <img src="../photo/${portfolio.port_photo}" class="portfolio_image">
                 </div>
-                <div class="portfolio_text">&nbsp;${portfolio.subject}</div>
+                <div class="portfolio_text" style="font-size: 15px">&nbsp;${portfolio.subject}</div>
             </div>
         </c:forEach>
     </div>

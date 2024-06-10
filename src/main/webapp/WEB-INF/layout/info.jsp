@@ -22,7 +22,7 @@
                 centerMode: true,
                 variableWidth: true,
                 autoplay: true,
-                autoplaySpeed: 2000
+                autoplaySpeed: 1000
             });
         });
     </script>
@@ -100,8 +100,8 @@
 </head>
 
 <body>
-<div class="https://ncamp.kr/">
-    <a href="">
+<div class="center">
+    <a href="https://ncamp.kr/">
     <div class="banner" id="banner1" style="background-image: url(/image/banner1.png)">
     </div>
     </a>
